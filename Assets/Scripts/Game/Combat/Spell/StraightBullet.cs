@@ -1,27 +1,37 @@
-using CongTDev.AudioManagement;
-using CongTDev.ObjectPooling;
 using System.Collections;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class StraightBullet : PoolObject, ISpell
     {
-        [SerializeField] private Rigidbody2D rb2d;
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float lifeTime;
+        [SerializeField]
+        private Rigidbody2D rb2d;
+
+        [SerializeField]
+        private float moveSpeed;
+
+        [SerializeField]
+        private float lifeTime;
 
         protected OrientationAbility ability;
 
         [Space]
         [Header("Sound")]
-        [SerializeField] private string soundPlayWhenStart;
-        [SerializeField] private string soundPlayWhenHit;
+        [SerializeField]
+        private string soundPlayWhenStart;
 
+        [SerializeField]
+        private string soundPlayWhenHit;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent<Fighter>(out var fighter) && ability.IsRightTarget(fighter))
+            if (
+                collision.TryGetComponent<Fighter>(out var fighter)
+                && ability.IsRightTarget(fighter)
+            )
             {
                 OnHitTarget(fighter);
                 if (!string.IsNullOrEmpty(soundPlayWhenHit))
@@ -47,7 +57,7 @@ namespace CongTDev.AbilitySystem.Spell
             var rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, rot);
 
-            if(!string.IsNullOrEmpty(soundPlayWhenStart))
+            if (!string.IsNullOrEmpty(soundPlayWhenStart))
             {
                 AudioManager.Play(soundPlayWhenStart);
             }

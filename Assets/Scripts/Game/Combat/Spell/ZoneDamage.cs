@@ -1,21 +1,30 @@
-﻿using CongTDev.ObjectPooling;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class ZoneDamage : PoolObject, ISpell
     {
         private static readonly int damageZoneHash = Animator.StringToHash("StartedZoneDamage");
 
-        [SerializeField] private Animator animator;
-        [SerializeField] private float prepareTime;
-        [SerializeField] private float duration;
-        [SerializeField] private float damageTimeElapse;
-        [SerializeField] private float damageRange;
+        [SerializeField]
+        private Animator animator;
+
+        [SerializeField]
+        private float prepareTime;
+
+        [SerializeField]
+        private float duration;
+
+        [SerializeField]
+        private float damageTimeElapse;
+
+        [SerializeField]
+        private float damageRange;
 
         private OrientationAbility _ability;
-        
+
         public void KickOff(OrientationAbility ability, Vector2 direction)
         {
             _ability = ability;
@@ -31,10 +40,17 @@ namespace CongTDev.AbilitySystem.Spell
             var endTime = Time.time + duration;
             while (Time.time < endTime)
             {
-                var hits = Physics2D.OverlapCircleAll(transform.position, damageRange, LayerMaskHelper.FigherMask);
+                var hits = Physics2D.OverlapCircleAll(
+                    transform.position,
+                    damageRange,
+                    LayerMaskHelper.FigherMask
+                );
                 foreach (var hit in hits)
                 {
-                    if(hit.TryGetComponent<Fighter>(out var fighter) && _ability.IsRightTarget(fighter))
+                    if (
+                        hit.TryGetComponent<Fighter>(out var fighter)
+                        && _ability.IsRightTarget(fighter)
+                    )
                     {
                         _ability.HitThisFighter(fighter);
                     }
@@ -52,4 +68,3 @@ namespace CongTDev.AbilitySystem.Spell
 #endif
     }
 }
-

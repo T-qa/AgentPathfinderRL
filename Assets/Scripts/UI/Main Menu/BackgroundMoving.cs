@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class BackgroundMoving : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField]
+    private float moveSpeed;
 
-    [SerializeField] private Collider2D commonCollider;
+    [SerializeField]
+    private Collider2D commonCollider;
 
     private float endPositionX;
     private float startPositionX;
@@ -20,7 +22,11 @@ public class BackgroundMoving : MonoBehaviour
         transform.Translate(moveSpeed * Time.deltaTime * Vector2.left);
         if (transform.position.x < endPositionX)
         {
-            transform.position = new Vector3(startPositionX, transform.position.y, transform.position.z);
+            transform.position = new Vector3(
+                startPositionX,
+                transform.position.y,
+                transform.position.z
+            );
         }
     }
 }

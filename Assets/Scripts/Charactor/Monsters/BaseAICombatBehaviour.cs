@@ -1,5 +1,5 @@
-﻿using CongTDev.AbilitySystem;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 public abstract class BaseAICombatBehaviour : MonoBehaviour
@@ -8,9 +8,14 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
     public const float COMMON_UPDATE_INTERVAL = 0.5f;
 
     [Header("Base fields")]
-    [SerializeField] protected float maxMoveRange;
-    [SerializeField] protected float attackRange;
-    [SerializeField] protected float vision;
+    [SerializeField]
+    protected float maxMoveRange;
+
+    [SerializeField]
+    protected float attackRange;
+
+    [SerializeField]
+    protected float vision;
 
     protected AbilityCaster abilityCaster;
     protected MonstersAI monsterAI;
@@ -48,7 +53,7 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
     protected virtual IEnumerator CombatStateExit()
     {
         GiveBackHealthBar();
-        if(IsAlive())
+        if (IsAlive())
         {
             monsterAI.MoveTo(monsterAI.StartPosition);
             yield return COMBAT_BREAK_TIME.Wait();

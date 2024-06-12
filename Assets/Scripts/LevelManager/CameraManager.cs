@@ -1,14 +1,19 @@
-using Cinemachine;
-using DG.Tweening;
 using System;
 using System.Collections;
+using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraManager : GlobalReference<CameraManager>
 {
-    [SerializeField] private CinemachineVirtualCamera virtureCamera;
-    [SerializeField] private CinemachineConfiner2D confiner;
-    [SerializeField] private Camera mainCam;
+    [SerializeField]
+    private CinemachineVirtualCamera virtureCamera;
+
+    [SerializeField]
+    private CinemachineConfiner2D confiner;
+
+    [SerializeField]
+    private Camera mainCam;
 
     private CinemachineFramingTransposer _transposer;
     private Tweener _tweener;
@@ -20,6 +25,7 @@ public class CameraManager : GlobalReference<CameraManager>
         base.Awake();
         _transposer = virtureCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
+
     public void SetConfiner(PolygonCollider2D boundary)
     {
         confiner.InvalidateCache();
@@ -33,29 +39,44 @@ public class CameraManager : GlobalReference<CameraManager>
         var followtranform = virtureCamera.Follow;
         var currentPosition = followtranform.position;
         var endTime = Time.time + comebackTime;
-        while(true)
+        while (true)
         {
             float remainTime = endTime - Time.time;
-            if(remainTime <= Mathf.Epsilon)
+            if (remainTime <= Mathf.Epsilon)
             {
                 yield break;
             }
             float distanceToTarget = Vector3.Distance(currentPosition, followtranform.position);
-            if(distanceToTarget <= Mathf.Epsilon)
+            if (distanceToTarget <= Mathf.Epsilon)
             {
                 yield break;
             }
             float speedNeedToReach = distanceToTarget / remainTime;
-            currentPosition = Vector3.MoveTowards(currentPosition, followtranform.position, speedNeedToReach);
+            currentPosition = Vector3.MoveTowards(
+                currentPosition,
+                followtranform.position,
+                speedNeedToReach
+            );
             virtureCamera.ForceCameraPosition(currentPosition, Quaternion.identity);
             yield return null;
         }
     }
 
-    public void MoveOffet(Vector3 offset, float speed, Action onComplete = null, Action onKill = null)
+    public void MoveOffet(
+        Vector3 offset,
+        float speed,
+        Action onComplete = null,
+        Action onKill = null
+    )
     {
         _tweener?.Kill();
-        _tweener = DOVirtual.Vector3(_transposer.m_TrackedObjectOffset, offset, speed, (value) => _transposer.m_TrackedObjectOffset = value)
+        _tweener = DOVirtual
+            .Vector3(
+                _transposer.m_TrackedObjectOffset,
+                offset,
+                speed,
+                (value) => _transposer.m_TrackedObjectOffset = value
+            )
             .SetEase(Ease.Linear)
             .OnComplete(() => onComplete?.Invoke())
             .OnKill(() => onKill?.Invoke());

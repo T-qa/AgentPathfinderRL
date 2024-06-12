@@ -1,22 +1,30 @@
-using DG.Tweening;
 using System.Collections;
+using Cinemachine;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Cinemachine;
 
 public class CutSceneController : MonoBehaviour
 {
-    [SerializeField] private Transform movingObject;
+    [SerializeField]
+    private Transform movingObject;
 
-    [SerializeField] private DialogueObject[] dialoguesStorage;
-    [SerializeField] private Image fadingImage;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField]
+    private DialogueObject[] dialoguesStorage;
+
+    [SerializeField]
+    private Image fadingImage;
+
+    [SerializeField]
+    private CinemachineVirtualCamera virtualCamera;
+
     [Space]
     [Header("Core thread")]
-    [SerializeField] private UnityEvent[] actionQueue;
+    [SerializeField]
+    private UnityEvent[] actionQueue;
 
     private Tweener _fadingTweener;
     private int _currentAction = 0;
@@ -31,7 +39,7 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while(_currentAction < actionQueue.Length)
+        while (_currentAction < actionQueue.Length)
         {
             _runningAction = 0;
             actionQueue[_currentAction++].Invoke();
@@ -49,7 +57,7 @@ public class CutSceneController : MonoBehaviour
     public void MoveTo(Transform target)
     {
         _runningAction++;
-        if(_movingCoroutine != null)
+        if (_movingCoroutine != null)
         {
             StopCoroutine(_movingCoroutine);
             _runningAction--;
@@ -70,9 +78,10 @@ public class CutSceneController : MonoBehaviour
         }
         _currentAction = Mathf.Clamp(index, 0, actionQueue.Length - 1);
     }
+
     public void PlayDialogue(int index)
     {
-        if(DialoguePanel.IsUsing)
+        if (DialoguePanel.IsUsing)
         {
             _runningAction--;
         }
@@ -87,7 +96,7 @@ public class CutSceneController : MonoBehaviour
     public void DelayActionEnd(float delay)
     {
         _runningAction++;
-        if(_delayActionCoroutine != null)
+        if (_delayActionCoroutine != null)
         {
             StopCoroutine(_delayActionCoroutine);
             _runningAction--;
@@ -97,7 +106,7 @@ public class CutSceneController : MonoBehaviour
 
     public void SetFade(bool state)
     {
-        SetFade(state, duration : 1f);
+        SetFade(state, duration: 1f);
     }
 
     public void SetFade(bool state, float duration)
@@ -115,7 +124,7 @@ public class CutSceneController : MonoBehaviour
     public void ChangeCameraSize(float size)
     {
         _runningAction++;
-        if(_camareSizeCoroutine != null)
+        if (_camareSizeCoroutine != null)
         {
             StopCoroutine(_camareSizeCoroutine);
             _runningAction--;
@@ -125,9 +134,13 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator ChangeCameraSizeCoroutine(float size)
     {
-        while(Mathf.Abs(virtualCamera.m_Lens.OrthographicSize - size) > Mathf.Epsilon)
+        while (Mathf.Abs(virtualCamera.m_Lens.OrthographicSize - size) > Mathf.Epsilon)
         {
-            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, size, _cameraChangeSizeSpeed * Time.fixedDeltaTime);
+            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(
+                virtualCamera.m_Lens.OrthographicSize,
+                size,
+                _cameraChangeSizeSpeed * Time.fixedDeltaTime
+            );
             yield return CoroutineHelper.fixedUpdateWait;
         }
         _camareSizeCoroutine = null;
@@ -139,7 +152,11 @@ public class CutSceneController : MonoBehaviour
         var distance = Vector2.Distance(Position, target.position);
         while (distance > 0.1f)
         {
-            movingObject.position = Vector3.MoveTowards(Position, target.position, _moveSpeed * Time.fixedDeltaTime);
+            movingObject.position = Vector3.MoveTowards(
+                Position,
+                target.position,
+                _moveSpeed * Time.fixedDeltaTime
+            );
             distance = Vector2.Distance(Position, target.position);
             yield return CoroutineHelper.fixedUpdateWait;
         }

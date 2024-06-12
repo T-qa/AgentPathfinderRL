@@ -1,14 +1,16 @@
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public class SkillBarController : MonoBehaviour
 {
     private const string FILE_NAME = "SkillSet";
 
-    [SerializeField] private SkillSet skillSet1;
+    [SerializeField]
+    private SkillSet skillSet1;
 
-    [SerializeField] private SkillSet skillSet2;
+    [SerializeField]
+    private SkillSet skillSet2;
 
     private void Awake()
     {
@@ -42,7 +44,8 @@ public class SkillBarController : MonoBehaviour
     {
         try
         {
-            var serializedSkilSet1 = (SkillSet.SerializedSkillSet)SaveLoadHandler.LoadFromFile(FILE_NAME);
+            var serializedSkilSet1 = (SkillSet.SerializedSkillSet)
+                SaveLoadHandler.LoadFromFile(FILE_NAME);
             //var serializedSkilSet2 = (SkillSet.SerializedSkillSet)SaveLoadHandler.LoadFromFile(fileName + "SkillSet2");
             serializedSkilSet1.Load(skillSet1);
             //serializedSkilSet2.Load(skillSet2);
@@ -51,6 +54,5 @@ public class SkillBarController : MonoBehaviour
         {
             skillSet1.SetToDefaultValue();
         }
-
     }
 }

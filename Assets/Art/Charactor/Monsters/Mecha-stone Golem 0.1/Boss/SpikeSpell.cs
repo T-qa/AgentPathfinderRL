@@ -1,25 +1,45 @@
-﻿using CongTDev.AudioManagement;
-using CongTDev.ObjectPooling;
+﻿using System.Collections;
 using DG.Tweening;
-using System.Collections;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class SpikeSpell : PoolObject, ISpell
     {
-        [SerializeField] private Transform damageZone;
-        [SerializeField] private Animator animator;
-        [SerializeField] private Collider2D collider2d;
-        [SerializeField] private Prefab explosionPrefab;
+        [SerializeField]
+        private Transform damageZone;
 
-        [SerializeField] private float damageRadius;
-        [SerializeField] private float explosionRadius;
-        [SerializeField] private float zoneScale;
-        [SerializeField] private float indicateDuration;
-        [SerializeField] private float waitAfterIndicated;
-        [SerializeField] private float timeOffsetAfterAnimation;
-        [SerializeField] private float spikeLifeTime;
+        [SerializeField]
+        private Animator animator;
+
+        [SerializeField]
+        private Collider2D collider2d;
+
+        [SerializeField]
+        private Prefab explosionPrefab;
+
+        [SerializeField]
+        private float damageRadius;
+
+        [SerializeField]
+        private float explosionRadius;
+
+        [SerializeField]
+        private float zoneScale;
+
+        [SerializeField]
+        private float indicateDuration;
+
+        [SerializeField]
+        private float waitAfterIndicated;
+
+        [SerializeField]
+        private float timeOffsetAfterAnimation;
+
+        [SerializeField]
+        private float spikeLifeTime;
 
         private void OnDisable()
         {
@@ -54,7 +74,11 @@ namespace CongTDev.AbilitySystem.Spell
 
         private void DealRangeDamage(OrientationAbility ability, float radius)
         {
-            var hits = Physics2D.OverlapCircleAll(damageZone.position, radius, LayerMaskHelper.FigherMask);
+            var hits = Physics2D.OverlapCircleAll(
+                damageZone.position,
+                radius,
+                LayerMaskHelper.FigherMask
+            );
             foreach (var hit in hits)
             {
                 if (hit.TryGetComponent<Fighter>(out var fighter) && ability.IsRightTarget(fighter))
@@ -69,7 +93,7 @@ namespace CongTDev.AbilitySystem.Spell
             if (PoolManager.Get<PoolObject>(explosionPrefab, out var intance))
             {
                 intance.transform.position = damageZone.position;
-                
+
                 DealRangeDamage(ability, explosionRadius);
             }
         }
@@ -83,7 +107,5 @@ namespace CongTDev.AbilitySystem.Spell
             Gizmos.DrawWireSphere(damageZone.position, explosionRadius);
         }
 #endif
-
     }
 }
-

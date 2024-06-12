@@ -1,12 +1,13 @@
-﻿using CongTDev.ObjectPooling;
-using TMPro;
+﻿using TMPro;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.Communicate
+namespace Tqa.DungeonQuest.Communicate
 {
     public class Message : PoolObject
     {
-        [SerializeField] private TextMeshProUGUI textUI;
+        [SerializeField]
+        private TextMeshProUGUI textUI;
 
         public void SetMessage(string sender, string message)
         {

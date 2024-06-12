@@ -1,4 +1,4 @@
-﻿namespace CongTDev.AbilitySystem
+﻿namespace Tqa.DungeonQuest.AbilitySystem
 {
     public enum Respond
     {
@@ -12,4 +12,3 @@
         NotAllow
     }
 }
-

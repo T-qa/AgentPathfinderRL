@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public class DraggablePanel : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
-
     private Vector2 _offset;
 
     public void OnBeginDrag(PointerEventData eventData)

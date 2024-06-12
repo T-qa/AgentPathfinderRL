@@ -1,5 +1,5 @@
-﻿using CongTDev.IOSystem;
-using System;
+﻿using System;
+using Tqa.DungeonQuest.IOSystem;
 
 [Serializable]
 public class ItemArray : SerializedObject, ISerializable
@@ -19,11 +19,11 @@ public class ItemArray : SerializedObject, ISerializable
 
     public override object Deserialize()
     {
-        if(wrappedJson == null)
+        if (wrappedJson == null)
             return null;
 
         items = new IItem[wrappedJson.Length];
-        for(int i = 0; i < wrappedJson.Length; i++)
+        for (int i = 0; i < wrappedJson.Length; i++)
         {
             items[i] = (IItem)JsonHelper.WrappedJsonToObject(wrappedJson[i]);
         }
@@ -34,7 +34,7 @@ public class ItemArray : SerializedObject, ISerializable
 
     public SerializedObject Serialize()
     {
-        if(items == null) 
+        if (items == null)
             return SerializedNullObject.intance;
 
         wrappedJson = new string[items.Length];

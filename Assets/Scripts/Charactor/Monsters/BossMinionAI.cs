@@ -1,19 +1,33 @@
-﻿using CongTDev.AbilitySystem;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 public class BossMinionAI : SeekerMovingAI
 {
-    [SerializeField] private float updateInterval;
-    [SerializeField] private float movingAngle;
-    [SerializeField] private float movingRange;
+    [SerializeField]
+    private float updateInterval;
+
+    [SerializeField]
+    private float movingAngle;
+
+    [SerializeField]
+    private float movingRange;
 
     [Header("Ability handler")]
-    [SerializeField] private MonstersController controller;
-    [SerializeField] private ActiveRune abilityRune;
-    [SerializeField] private float abilityUseInterval;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float aimTime;
+    [SerializeField]
+    private MonstersController controller;
+
+    [SerializeField]
+    private ActiveRune abilityRune;
+
+    [SerializeField]
+    private float abilityUseInterval;
+
+    [SerializeField]
+    private float attackRange;
+
+    [SerializeField]
+    private float aimTime;
 
     private IActiveAbility _ability;
     private Fighter _target;
@@ -33,7 +47,7 @@ public class BossMinionAI : SeekerMovingAI
 
     private void OnDestroy()
     {
-        if(controller != null)
+        if (controller != null)
         {
             controller.OnDoneSetup -= StartAIRoutine;
         }
@@ -52,7 +66,6 @@ public class BossMinionAI : SeekerMovingAI
         _ability.Install(_caster);
         var timeToUseAbility = Time.time;
 
-        
         while (!_caster.Owner.Health.IsEmpty)
         {
             var distanceToTarget = Vector2.Distance(transform.position, _target.Position);
@@ -83,6 +96,7 @@ public class BossMinionAI : SeekerMovingAI
         yield return (castDelay - aimTime).Wait();
         _caster.LookDirection = _target.Position;
     }
+
     private void GiveBackHealthBar()
     {
         if (_healthBar != null)
@@ -99,7 +113,6 @@ public class BossMinionAI : SeekerMovingAI
         Gizmos.DrawWireSphere(transform.position, movingRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    } 
+    }
 #endif
-
 }

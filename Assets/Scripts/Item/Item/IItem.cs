@@ -1,6 +1,6 @@
-using CongTDev.IOSystem;
 using System;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public interface IItem : ISerializable

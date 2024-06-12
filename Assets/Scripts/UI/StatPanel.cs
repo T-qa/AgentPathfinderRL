@@ -3,29 +3,33 @@ using UnityEngine;
 
 public class StatPanel : MonoBehaviour
 {
-    private static string StatToString(Stat stat) => stat switch
-    {
-        Stat.MaxHealth => "Max health",
-        Stat.MaxMana => "Max mana",
-        Stat.MoveSpeed => "Move speed",
-        Stat.AttackPower => "Attack point",
-        Stat.Defence => "Defence",
-        Stat.BlockChance => "Block chance",
-        Stat.Accuracy => "Accuracy",
-        Stat.Evasion => "Evasion",
-        Stat.CriticalChance => "Critical chance",
-        Stat.CritticalHitDamage => "Critical hit damage",
-        _ => "Unknow stat"
-    };
+    private static string StatToString(Stat stat) =>
+        stat switch
+        {
+            Stat.MaxHealth => "Max health",
+            Stat.MaxMana => "Max mana",
+            Stat.MoveSpeed => "Move speed",
+            Stat.AttackPower => "Attack point",
+            Stat.Defence => "Defence",
+            Stat.BlockChance => "Block chance",
+            Stat.Accuracy => "Accuracy",
+            Stat.Evasion => "Evasion",
+            Stat.CriticalChance => "Critical chance",
+            Stat.CritticalHitDamage => "Critical hit damage",
+            _ => "Unknow stat"
+        };
 
+    [SerializeField]
+    private Stat statDisplayed;
 
-    [SerializeField] private Stat statDisplayed;
+    [SerializeField]
+    private bool isRound;
 
-    [SerializeField] private bool isRound;
+    [SerializeField]
+    private TextMeshProUGUI statNameUI;
 
-    [SerializeField] private TextMeshProUGUI statNameUI;
-
-    [SerializeField] private TextMeshProUGUI statValueUI;
+    [SerializeField]
+    private TextMeshProUGUI statValueUI;
 
     private CharactorStat playerStats;
 
@@ -52,7 +56,6 @@ public class StatPanel : MonoBehaviour
         playerStats[statDisplayed].OnValueChange -= UpdateUI;
     }
 
-
     private void UpdateUI(float value)
     {
         if (isRound)
@@ -64,5 +67,4 @@ public class StatPanel : MonoBehaviour
             statValueUI.text = $"{value:F2}";
         }
     }
-
 }

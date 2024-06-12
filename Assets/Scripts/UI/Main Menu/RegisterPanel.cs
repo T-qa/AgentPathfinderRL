@@ -1,11 +1,11 @@
-using CongTDev.IOSystem;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace CongTDev.MainMenu
+namespace Tqa.DungeonQuest.MainMenu
 {
     public class RegisterPanel : MonoBehaviour
     {
@@ -17,13 +17,17 @@ namespace CongTDev.MainMenu
             "Username has invalid charactor"
         };
 
-        [SerializeField] private TextMeshProUGUI messageText;
+        [SerializeField]
+        private TextMeshProUGUI messageText;
 
-        [SerializeField] private GameObject messagePanel;
+        [SerializeField]
+        private GameObject messagePanel;
 
-        [SerializeField] private TMP_InputField inputField;
+        [SerializeField]
+        private TMP_InputField inputField;
 
-        [SerializeField] private int usernameLengthLimit;
+        [SerializeField]
+        private int usernameLengthLimit;
 
         private HashSet<string> users;
 
@@ -53,9 +57,10 @@ namespace CongTDev.MainMenu
             if (CheckInput(inputField.text))
             {
                 ConfirmPanel.Ask(
-                    "Username can't be changed.\n" +
-                    "Do you want to start game with this username?",
-                    StartGame);
+                    "Username can't be changed.\n"
+                        + "Do you want to start game with this username?",
+                    StartGame
+                );
             }
         }
 

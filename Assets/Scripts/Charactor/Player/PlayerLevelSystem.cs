@@ -1,9 +1,9 @@
-using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
 using System;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class PlayerLevelSystem : MonoBehaviour
@@ -20,9 +20,14 @@ public class PlayerLevelSystem : MonoBehaviour
     public static event Action OnValueChange;
     public static event Action OnLevelUp;
 
-    [SerializeField] private Fighter player;
-    [SerializeField] private BaseStatData statData;
-    [SerializeField] private Prefab VFXWhenLevelUp;
+    [SerializeField]
+    private Fighter player;
+
+    [SerializeField]
+    private BaseStatData statData;
+
+    [SerializeField]
+    private Prefab VFXWhenLevelUp;
 
     private Dictionary<Stat, StatModifier> _statModifiers = new();
 
@@ -45,12 +50,15 @@ public class PlayerLevelSystem : MonoBehaviour
 
     public void SaveToFile()
     {
-        SaveLoadHandler.SaveToFile(FILE_NAME, new LevelData()
-        {
-            currentLevel = CurrentLevel,
-            currentXp = CurrentLevel,
-            capacityXp = CapacityXp
-        });
+        SaveLoadHandler.SaveToFile(
+            FILE_NAME,
+            new LevelData()
+            {
+                currentLevel = CurrentLevel,
+                currentXp = CurrentLevel,
+                capacityXp = CapacityXp
+            }
+        );
     }
 
     public void LoadFromFile()
@@ -95,7 +103,7 @@ public class PlayerLevelSystem : MonoBehaviour
     private void LevelUpEffect()
     {
         AudioManager.Play("LevelUp");
-        if(PoolManager.Get<PoolObject>(VFXWhenLevelUp, out var instance))
+        if (PoolManager.Get<PoolObject>(VFXWhenLevelUp, out var instance))
         {
             instance.transform.position = player.Position;
         }
@@ -103,7 +111,7 @@ public class PlayerLevelSystem : MonoBehaviour
 
     private void SubtractLevel()
     {
-        if(CurrentLevel == 1)
+        if (CurrentLevel == 1)
         {
             return;
         }
@@ -127,7 +135,6 @@ public class PlayerLevelSystem : MonoBehaviour
 
         player.Health.Fill();
         player.Mana.Fill();
-
     }
 
     [Serializable]

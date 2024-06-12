@@ -1,12 +1,14 @@
-using CongTDev.ObjectPooling;
 using TMPro;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class FloatingText : PoolObject
 {
-    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+    [SerializeField]
+    private TextMeshProUGUI textMeshProUGUI;
 
-    [SerializeField] private Animator animator;
+    [SerializeField]
+    private Animator animator;
 
     private Collider2D _followColider;
     private Vector2 _offset;
@@ -23,6 +25,7 @@ public class FloatingText : PoolObject
             transform.position = (Vector2)_followColider.bounds.center + _offset;
         }
     }
+
     public void DisplayText(DamageBlock damageBlock)
     {
         _followColider = damageBlock.Target.HitBox;
@@ -38,5 +41,4 @@ public class FloatingText : PoolObject
             _ => string.Empty
         };
     }
-
 }

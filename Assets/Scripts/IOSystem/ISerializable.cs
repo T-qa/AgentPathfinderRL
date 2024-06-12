@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CongTDev.IOSystem
+namespace Tqa.DungeonQuest.IOSystem
 {
     public interface ISerializable
     {

@@ -1,30 +1,43 @@
-﻿using CongTDev.AbilitySystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.IOSystem
+namespace Tqa.DungeonQuest.IOSystem
 {
     public static class JsonHelper
     {
-        private static readonly Dictionary<SerializedType, Type> typeMap = new()
-        {
-            { SerializedType.Equipment, typeof(Equipment.SerializedEquipment) },
-            { SerializedType.ResourceAsset, typeof(SerializedResourceAsset) },
-            { SerializedType.Null, typeof(SerializedNullObject) },
-            { SerializedType.PassiveAbility, typeof(PassiveAbility.PassiveAbilitySerialize) },
-            { SerializedType.OrientationAbility, typeof(OrientationAbility.SerializedOrientationAbility) },
-            { SerializedType.EquipmentManager, typeof(EquipmentManager.SerializedEquipmentManager) },
-            { SerializedType.SkillSet, typeof(SkillSet.SerializedSkillSet) },
-            { SerializedType.SeflActiveAbility, typeof(SelfActiveAbility.SerializedSeflActiveAbility) },
-            { SerializedType.TargetingAbility, typeof(TargetingAbility.SerializedTargetingAbility) },
-            { SerializedType.ConsumableItem, typeof(ConsumableItem.SerializedConsumableItem) },
-            { SerializedType.ItemArray, typeof(ItemArray) },
+        private static readonly Dictionary<SerializedType, Type> typeMap =
+            new()
+            {
+                { SerializedType.Equipment, typeof(Equipment.SerializedEquipment) },
+                { SerializedType.ResourceAsset, typeof(SerializedResourceAsset) },
+                { SerializedType.Null, typeof(SerializedNullObject) },
+                { SerializedType.PassiveAbility, typeof(PassiveAbility.PassiveAbilitySerialize) },
+                {
+                    SerializedType.OrientationAbility,
+                    typeof(OrientationAbility.SerializedOrientationAbility)
+                },
+                {
+                    SerializedType.EquipmentManager,
+                    typeof(EquipmentManager.SerializedEquipmentManager)
+                },
+                { SerializedType.SkillSet, typeof(SkillSet.SerializedSkillSet) },
+                {
+                    SerializedType.SeflActiveAbility,
+                    typeof(SelfActiveAbility.SerializedSeflActiveAbility)
+                },
+                {
+                    SerializedType.TargetingAbility,
+                    typeof(TargetingAbility.SerializedTargetingAbility)
+                },
+                { SerializedType.ConsumableItem, typeof(ConsumableItem.SerializedConsumableItem) },
+                { SerializedType.ItemArray, typeof(ItemArray) },
+            };
 
-        };
-
-        public static Type ToSystemType(this SerializedType serializedType) => typeMap[serializedType];
+        public static Type ToSystemType(this SerializedType serializedType) =>
+            typeMap[serializedType];
 
         public static string ToWrappedJson(this ISerializable serializableObject)
         {
@@ -49,7 +62,10 @@ namespace CongTDev.IOSystem
             return null;
         }
 
-        public static void OverideToJsonWrapper(this ISerializable serializableObject, ref JsonWrapper wrapper)
+        public static void OverideToJsonWrapper(
+            this ISerializable serializableObject,
+            ref JsonWrapper wrapper
+        )
         {
             if (serializableObject == null)
             {
@@ -75,7 +91,8 @@ namespace CongTDev.IOSystem
             if (wrapper is null || wrapper.type == SerializedType.Null)
                 return null;
 
-            var serializedObject = (SerializedObject)JsonUtility.FromJson(wrapper.json, wrapper.type.ToSystemType());
+            var serializedObject = (SerializedObject)
+                JsonUtility.FromJson(wrapper.json, wrapper.type.ToSystemType());
             return serializedObject?.Deserialize();
         }
 
@@ -107,5 +124,4 @@ namespace CongTDev.IOSystem
         public SerializedType type;
         public string json;
     }
-
 }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using UnityEngine.Pool;
 using UnityEngine;
+using UnityEngine.Pool;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Passive rune", menuName = "Rune/Passive")]
     public class PassiveRune : Rune
     {
-        [SerializeField] private List<BaseEffectFactory> effectsApplyWhenEquip;
+        [SerializeField]
+        private List<BaseEffectFactory> effectsApplyWhenEquip;
 
         public IEnumerable<BaseEffectFactory> EffectsApplyWhenEquip => effectsApplyWhenEquip;
 
@@ -17,7 +18,7 @@ namespace CongTDev.AbilitySystem
             return new PassiveAbility(this);
         }
 
-        private readonly static string[] _types = new string[] { "Rune", "Passive" };
+        private static readonly string[] _types = new string[] { "Rune", "Passive" };
 
         public override IEnumerable<string> GetSubTypes() => _types;
     }

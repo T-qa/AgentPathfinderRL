@@ -38,5 +38,4 @@ public class LevelSystem
             _currentExp = CapacityExp - 1;
         }
     }
-
 }

@@ -1,9 +1,9 @@
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -11,11 +11,20 @@ public class Inventory : MonoBehaviour
     public const string TRY_ADD_ITEM_TO_INVENTROY = "OnTryAddItemToInventory";
     public const int DEFAULT_CAPACITY = 30;
 
-    [SerializeField] private Transform contentCanvas;
-    [SerializeField] private InventorySlot itemSlotPrefabs;
-    [SerializeField] private List<BaseItemFactory> defaultIntialItems;
-    [SerializeField] private OptionBox optionBox;
-    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField]
+    private Transform contentCanvas;
+
+    [SerializeField]
+    private InventorySlot itemSlotPrefabs;
+
+    [SerializeField]
+    private List<BaseItemFactory> defaultIntialItems;
+
+    [SerializeField]
+    private OptionBox optionBox;
+
+    [SerializeField]
+    private TextMeshProUGUI goldText;
 
     private readonly List<InventorySlot> slots = new();
 
@@ -143,24 +152,26 @@ public class Inventory : MonoBehaviour
 
     private void SaveInventory()
     {
-        SaveLoadHandler.SaveToFile(FileNameData.Inventory, 
-            ItemArray.GetIntance(slots.AsEnumerable().Select(slot => slot.Item).ToArray()));
+        SaveLoadHandler.SaveToFile(
+            FileNameData.Inventory,
+            ItemArray.GetIntance(slots.AsEnumerable().Select(slot => slot.Item).ToArray())
+        );
     }
+
     private void LoadInventory()
     {
         try
         {
             var items = ((ItemArray)SaveLoadHandler.LoadFromFile(FileNameData.Inventory)).items;
             ChangeCapacity(items.Length);
-            for (int i = 0; i< Capacity;i++)
+            for (int i = 0; i < Capacity; i++)
             {
                 slots[i].PushItem(items[i]);
             }
         }
-        catch 
+        catch
         {
             InitDefault();
         }
     }
-
 }

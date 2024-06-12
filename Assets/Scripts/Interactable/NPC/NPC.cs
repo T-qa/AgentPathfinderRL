@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class NPC : BaseInteractable
 {
-    [SerializeField] private DialogueObject dialogueObject;
-    [SerializeField] private GameObject shop;
+    [SerializeField]
+    private DialogueObject dialogueObject;
+
+    [SerializeField]
+    private GameObject shop;
 
     public override void Interact()
     {

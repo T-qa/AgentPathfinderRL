@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(menuName = "Item/RuneFatory")]
     public class RuneFactory : BaseItemFactory
     {
-        [SerializeField] private Rune rune;
+        [SerializeField]
+        private Rune rune;
 
         public override IItem CreateItem()
         {

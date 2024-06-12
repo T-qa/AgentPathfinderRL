@@ -1,6 +1,6 @@
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
 using System;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -8,14 +8,22 @@ public class TownChest : BaseInteractable
 {
     public const int CHEST_CAPACITY = 9;
 
-    [SerializeField] private Sprite openingChest;
-    [SerializeField] private Sprite closingChest;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private BaseItemFactory[] defaultInitialItems;
+    [SerializeField]
+    private Sprite openingChest;
+
+    [SerializeField]
+    private Sprite closingChest;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private BaseItemFactory[] defaultInitialItems;
 
     [Space]
     [Header("Save handler")]
-    [SerializeField] private string saveFileName;
+    [SerializeField]
+    private string saveFileName;
 
     private IItem[] _items;
 
@@ -92,5 +100,4 @@ public class TownChest : BaseInteractable
             _items[i] = defaultInitialItems[i].CreateItem();
         }
     }
-
 }

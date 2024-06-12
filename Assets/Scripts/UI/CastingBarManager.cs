@@ -1,11 +1,14 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.ObjectPooling;
+﻿using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class CastingBarManager : GlobalReference<CastingBarManager>
 {
-    [SerializeField] private Prefab castingBarPrefab;
-    [SerializeField] private Transform worldSpaceCanvas;
+    [SerializeField]
+    private Prefab castingBarPrefab;
+
+    [SerializeField]
+    private Transform worldSpaceCanvas;
 
     public void ShowCastingBar(AbilityCaster caster)
     {

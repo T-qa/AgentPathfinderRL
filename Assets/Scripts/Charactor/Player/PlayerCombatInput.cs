@@ -6,7 +6,6 @@ public class PlayerCombatInput : BaseMovementInput
 {
     private InputActions _inputActions;
 
-
     private void Awake()
     {
         _inputActions = InputCentral.InputActions;

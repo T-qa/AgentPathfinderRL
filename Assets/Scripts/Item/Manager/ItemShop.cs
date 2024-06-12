@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class ItemShop : MonoBehaviour
 {
-    [SerializeField] private List<ShopSlot> shopSlots;
-    [SerializeField] private List<ShopItem> randomItems;
-    [SerializeField] private bool isRandom;
-    [SerializeField] private int minAmount;
+    [SerializeField]
+    private List<ShopSlot> shopSlots;
+
+    [SerializeField]
+    private List<ShopItem> randomItems;
+
+    [SerializeField]
+    private bool isRandom;
+
+    [SerializeField]
+    private int minAmount;
 
     [Serializable]
     public class ShopItem
@@ -42,7 +49,10 @@ public class ItemShop : MonoBehaviour
 
     private void InitItemsRandomly()
     {
-        int randomNumberOfSlot = UnityEngine.Random.Range(Mathf.Clamp(minAmount, 0, shopSlots.Count -1), shopSlots.Count + 1);
+        int randomNumberOfSlot = UnityEngine.Random.Range(
+            Mathf.Clamp(minAmount, 0, shopSlots.Count - 1),
+            shopSlots.Count + 1
+        );
         for (int i = 0; i < randomNumberOfSlot; i++)
         {
             var randomItemIndex = UnityEngine.Random.Range(0, randomItems.Count);

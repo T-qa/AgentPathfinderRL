@@ -1,14 +1,17 @@
-using CongTDev.AbilitySystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Fighter : MonoBehaviour
 {
-    [field: SerializeField] public Collider2D HitBox { get; private set; }
-    [field: SerializeField] public Movement Movement { get; private set; }
+    [field: SerializeField]
+    public Collider2D HitBox { get; private set; }
+
+    [field: SerializeField]
+    public Movement Movement { get; private set; }
 
     public readonly ResourceBlock Health = new();
     public readonly ResourceBlock Mana = new();
@@ -87,7 +90,7 @@ public class Fighter : MonoBehaviour
             return;
 
         damageBlock.CalculateFinalDamage(this);
-        if(damageBlock.DamageType != DamageType.EnviromentDamage)
+        if (damageBlock.DamageType != DamageType.EnvinronmentalDamage)
         {
             damageBlock.Source.OnDealDamage?.Invoke(damageBlock);
         }
@@ -107,5 +110,5 @@ public class Fighter : MonoBehaviour
         {
             OnDead?.Invoke(this);
         }
-    }  
+    }
 }

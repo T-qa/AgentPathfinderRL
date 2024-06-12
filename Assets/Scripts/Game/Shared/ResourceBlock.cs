@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 [System.Serializable]
 public class ResourceBlock
 {
@@ -10,8 +9,7 @@ public class ResourceBlock
 
     public event Action<float, float> OnValueChange;
 
-    public float Ratio
-        => _capacity == 0 ? 0 : _current / _capacity;
+    public float Ratio => _capacity == 0 ? 0 : _current / _capacity;
     public bool IsEmpty => _current <= Mathf.Epsilon;
     public bool IsFull => _capacity - _current <= Mathf.Epsilon;
 
@@ -47,7 +45,8 @@ public class ResourceBlock
     // This function use for set the value without trigged event. Please use it carefully
     public void ResetValue(float current, float capacity)
     {
-        if(capacity < 0) capacity = 0;
+        if (capacity < 0)
+            capacity = 0;
         _capacity = capacity;
         _current = Mathf.Min(current, _capacity);
     }
@@ -59,7 +58,8 @@ public class ResourceBlock
 
     public void Recover(float value)
     {
-        if (value <= 0) return;
+        if (value <= 0)
+            return;
         Current += value;
     }
 
@@ -68,10 +68,11 @@ public class ResourceBlock
         float value = Capacity * ratio;
         Recover(value);
     }
-    
-    public void Draw(float value) 
+
+    public void Draw(float value)
     {
-        if (value <= 0) return;
+        if (value <= 0)
+            return;
         Current -= value;
     }
 
@@ -80,5 +81,4 @@ public class ResourceBlock
         float value = Capacity * ratio;
         Draw(value);
     }
-    
 }

@@ -1,4 +1,4 @@
-﻿namespace CongTDev.AbilitySystem
+﻿namespace Tqa.DungeonQuest.AbilitySystem
 {
     public enum TargetType
     {
@@ -6,4 +6,3 @@
         Enemy
     }
 }
-

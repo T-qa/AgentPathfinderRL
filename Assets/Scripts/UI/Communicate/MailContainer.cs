@@ -2,15 +2,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CongTDev.Communicate
+namespace Tqa.DungeonQuest.Communicate
 {
     public class MailContainer : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI titleText;
-        [SerializeField] private Image mask;
-        [SerializeField] private Color readedColor;
-        [SerializeField] private Color notReadedColor;
-        [SerializeField] private Color hightlightColor;
+        [SerializeField]
+        private TextMeshProUGUI titleText;
+
+        [SerializeField]
+        private Image mask;
+
+        [SerializeField]
+        private Color readedColor;
+
+        [SerializeField]
+        private Color notReadedColor;
+
+        [SerializeField]
+        private Color hightlightColor;
 
         private Mail _holdingMail;
 
@@ -27,6 +36,7 @@ namespace CongTDev.Communicate
                 ValidateColor();
             }
         }
+
         private void OnEnable()
         {
             ValidateColor();

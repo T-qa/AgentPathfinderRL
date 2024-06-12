@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     /// <summary>
     /// Use for play audio throught unity event on scene
     /// </summary>
     public class AudioPlayerHelper : MonoBehaviour
     {
-        [SerializeField] private string defaultBackgroundMusic;
+        [SerializeField]
+        private string defaultBackgroundMusic;
 
         private PoolingAudioSource _musicSource;
         private Coroutine _musicDelayCoroutine;
@@ -22,19 +23,20 @@ namespace CongTDev.AudioManagement
         {
             if (!string.IsNullOrEmpty(defaultBackgroundMusic))
             {
-                PlayeMusic(defaultBackgroundMusic);
+                PlayMusic(defaultBackgroundMusic);
             }
         }
 
-        public void PlayeMusic(string musicName)
+        public void PlayMusic(string musicName)
         {
-            if(_musicDelayCoroutine != null)
+            if (_musicDelayCoroutine != null)
             {
                 StopCoroutine(_musicDelayCoroutine);
             }
             StopMusic();
             _musicDelayCoroutine = StartCoroutine(PlayMusicDelay(musicName));
         }
+
         private IEnumerator PlayMusicDelay(string musicName)
         {
             yield return 0.5f.Wait();

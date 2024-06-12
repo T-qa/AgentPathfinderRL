@@ -1,13 +1,13 @@
-﻿using CongTDev.EventManagers;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 
-namespace CongTDev.IOSystem
+namespace Tqa.DungeonQuest.IOSystem
 {
     public static class FileNameData
     {
-        public readonly static string SavePath = Application.persistentDataPath;
+        public static readonly string SavePath = Application.persistentDataPath;
 
         private static string _currentUser = "Test";
         public static string CurrentUser
@@ -43,7 +43,7 @@ namespace CongTDev.IOSystem
             string path = Path.Combine(SavePath, username);
             if (Directory.Exists(path))
             {
-                foreach(var file in Directory.GetFiles(path))
+                foreach (var file in Directory.GetFiles(path))
                 {
                     File.Delete(file);
                 }
@@ -78,7 +78,6 @@ namespace CongTDev.IOSystem
             return Directory.Exists(path);
         }
 
-
         public const string Equiments = "Equipment";
         public const string Abilities = "Ability";
         public const string Inventory = "Inventory";
@@ -108,5 +107,4 @@ namespace CongTDev.IOSystem
             return $"ConsumableItems/{consumableName}";
         }
     }
-
 }

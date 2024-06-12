@@ -1,15 +1,20 @@
-using CongTDev.ObjectPooling;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class StraightExplosionBullet : StraightBullet
     {
-        [SerializeField] protected Prefab explosionPrefab;
-        [SerializeField] protected float explosionRange;
-        [SerializeField] protected bool friendlyHit;
+        [SerializeField]
+        protected Prefab explosionPrefab;
+
+        [SerializeField]
+        protected float explosionRange;
+
+        [SerializeField]
+        protected bool friendlyHit;
 
         protected override void OnHitTarget(Fighter fighter)
         {
@@ -22,24 +27,28 @@ namespace CongTDev.AbilitySystem.Spell
             if (PoolManager.Get<IPoolObject>(explosionPrefab, out var instance))
             {
                 instance.gameObject.transform.position = position;
-                var hits = Physics2D.OverlapCircleAll(position, explosionRange, LayerMaskHelper.FigherMask);
+                var hits = Physics2D.OverlapCircleAll(
+                    position,
+                    explosionRange,
+                    LayerMaskHelper.FigherMask
+                );
                 foreach (var hit in hits)
                 {
                     if (hit.TryGetComponent<Fighter>(out var fighter))
                     {
-                        if(friendlyHit)
+                        if (friendlyHit)
                         {
                             ability.HitThisFighter(fighter);
                         }
-                        else if(ability.IsRightTarget(fighter))
+                        else if (ability.IsRightTarget(fighter))
                         {
                             ability.HitThisFighter(fighter);
                         }
-                        
                     }
                 }
             }
         }
+
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {

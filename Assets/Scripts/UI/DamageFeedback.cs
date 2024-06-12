@@ -1,5 +1,5 @@
-using CongTDev.ObjectPooling;
 using System;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class DamageFeedback : MonoBehaviour
@@ -11,11 +11,14 @@ public class DamageFeedback : MonoBehaviour
         _instanceCallback?.Invoke(damageBlock);
     }
 
-    [SerializeField] private Prefab floatingTextPrefab;
+    [SerializeField]
+    private Prefab floatingTextPrefab;
 
-    [SerializeField] private Prefab damageVFXPrefab;
+    [SerializeField]
+    private Prefab damageVFXPrefab;
 
-    [SerializeField] private Transform worldSpaceCanvas;
+    [SerializeField]
+    private Transform worldSpaceCanvas;
 
     public bool isDisplayText;
     public bool isUseVFX;
@@ -36,7 +39,7 @@ public class DamageFeedback : MonoBehaviour
         if (!isUseVFX || damageBlock.State == DamageState.Miss)
             return;
 
-        if(PoolManager.Get<HitVFX>(damageVFXPrefab, out var hitVfx))
+        if (PoolManager.Get<HitVFX>(damageVFXPrefab, out var hitVfx))
         {
             hitVfx.RunAnimation(damageBlock);
         }
@@ -47,7 +50,7 @@ public class DamageFeedback : MonoBehaviour
         if (!isDisplayText)
             return;
 
-        if(PoolManager.Get<FloatingText>(floatingTextPrefab, out var floatingText))
+        if (PoolManager.Get<FloatingText>(floatingTextPrefab, out var floatingText))
         {
             floatingText.transform.SetParent(worldSpaceCanvas);
             floatingText.DisplayText(damageBlock);

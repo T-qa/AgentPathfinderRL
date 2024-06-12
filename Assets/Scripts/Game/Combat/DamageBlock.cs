@@ -13,46 +13,36 @@ public enum DamageType
 {
     PhysicalDamage,
     MagicDamage,
-    EnviromentDamage
+    EnvinronmentalDamage
 }
 
 public class DamageBlock
 {
     #region Static Member
     private const float BLOCKMULTILIER = -0.7f;
-    private static readonly IReadOnlyDictionary<DamageType, IEnumerable<Action<DamageBlock>>> _actionMap
-        = new Dictionary<DamageType, IEnumerable<Action<DamageBlock>>>()
+    private static readonly IReadOnlyDictionary<
+        DamageType,
+        IEnumerable<Action<DamageBlock>>
+    > _actionMap = new Dictionary<DamageType, IEnumerable<Action<DamageBlock>>>()
     {
         {
-            DamageType.PhysicalDamage, new Action<DamageBlock>[]
-            {
-                CriticalCalculater,
-                BlockCalculator,
-                MissCalculator
-
-            }
+            DamageType.PhysicalDamage,
+            new Action<DamageBlock>[] { CriticalCalculater, BlockCalculator, MissCalculator }
         },
         {
-            DamageType.MagicDamage, new Action<DamageBlock>[]
-            {
-                CriticalCalculater,
-                BlockCalculator,
-                MissCalculator
-
-            }
+            DamageType.MagicDamage,
+            new Action<DamageBlock>[] { CriticalCalculater, BlockCalculator, MissCalculator }
         },
-            {
-            DamageType.EnviromentDamage, new Action<DamageBlock>[]
-            {
-            }
-        }
+        { DamageType.EnvinronmentalDamage, new Action<DamageBlock>[] { } }
     };
 
     private static void MissCalculator(DamageBlock damageBlock)
     {
         CharactorStat targetStat = damageBlock.Target.Stats;
 
-        float missRate = targetStat[Stat.Evasion].FinalValue - damageBlock.Source.Stats[Stat.Accuracy].FinalValue;
+        float missRate =
+            targetStat[Stat.Evasion].FinalValue
+            - damageBlock.Source.Stats[Stat.Accuracy].FinalValue;
 
         if (!Chance.TryOnPercent(missRate))
             return;
@@ -65,7 +55,9 @@ public class DamageBlock
     {
         CharactorStat targetStat = damageBlock.Target.Stats;
 
-        float blockRate = targetStat[Stat.BlockChance].FinalValue - damageBlock.Source.Stats[Stat.Accuracy].FinalValue;
+        float blockRate =
+            targetStat[Stat.BlockChance].FinalValue
+            - damageBlock.Source.Stats[Stat.Accuracy].FinalValue;
 
         if (!Chance.TryOnPercent(blockRate))
             return;
@@ -79,7 +71,9 @@ public class DamageBlock
         if (!Chance.TryOnPercent(damageBlock.Source.Stats[Stat.CriticalChance].FinalValue))
             return;
 
-        damageBlock.AddMutiplier(damageBlock.Source.Stats[Stat.CritticalHitDamage].FinalValue / 100);
+        damageBlock.AddMutiplier(
+            damageBlock.Source.Stats[Stat.CritticalHitDamage].FinalValue / 100
+        );
         damageBlock.State = DamageState.CriticalDamage;
     }
     #endregion
@@ -104,7 +98,7 @@ public class DamageBlock
 
     public void Init(float damage)
     {
-        DamageType = DamageType.EnviromentDamage;
+        DamageType = DamageType.EnvinronmentalDamage;
         RawDamage = damage;
         Multiplier = 1f;
         CurrentDamage = damage;
@@ -115,7 +109,8 @@ public class DamageBlock
         Multiplier += value;
         CurrentDamage = RawDamage * Multiplier;
         State = DamageState.NormalDamage;
-        if (CurrentDamage < 0) CurrentDamage = 0;
+        if (CurrentDamage < 0)
+            CurrentDamage = 0;
     }
 
     public void CalculateFinalDamage(Fighter target)

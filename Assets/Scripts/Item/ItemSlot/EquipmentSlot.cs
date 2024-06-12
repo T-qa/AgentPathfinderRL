@@ -1,13 +1,15 @@
-﻿using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
+﻿using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EquipmentSlot : ItemSlot<Equipment>
 {
-    [field: SerializeField] public Equipment.Slot EquipSlot { get; private set; }
+    [field: SerializeField]
+    public Equipment.Slot EquipSlot { get; private set; }
 
-    [SerializeField] private Image background;
+    [SerializeField]
+    private Image background;
 
     public override bool IsMeetSlotRequiment(IItem item)
     {
@@ -22,7 +24,7 @@ public class EquipmentSlot : ItemSlot<Equipment>
         if (background != null)
         {
             background.enabled = false;
-        }   
+        }
     }
 
     protected override void OnItemGetOut(Equipment item)

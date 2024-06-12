@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public interface IAbility : IItem
     {
@@ -8,6 +8,5 @@ namespace CongTDev.AbilitySystem
 
         AbilityCaster Caster { get; }
         void Install(AbilityCaster caster);
-
     }
 }

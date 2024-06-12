@@ -1,22 +1,24 @@
-using CongTDev.AudioManagement;
+using Tqa.DungeonQuest.AudioManagement;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private GameObject openingDoor;
-    [SerializeField] private GameObject closingDoor;
+    [SerializeField]
+    private GameObject openingDoor;
+
+    [SerializeField]
+    private GameObject closingDoor;
 
     private bool _isOpenning;
 
     private void Awake()
     {
-        _isOpenning = openingDoor.gameObject.activeSelf;
+        _isOpenning = openingDoor.activeSelf;
     }
 
-
-    public void SwicthState()
+    public void SwicthDoorState()
     {
-        if(_isOpenning)
+        if (_isOpenning)
         {
             CloseDoor();
         }

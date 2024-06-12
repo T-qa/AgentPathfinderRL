@@ -1,15 +1,16 @@
-﻿using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
-using System.Text;
+﻿using System.Text;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public class TargetingAbility : ActiveAbility<TargetingRune>
     {
         private Fighter _choosedTarget;
 
-        public TargetingAbility(TargetingRune rune) : base(rune)
+        public TargetingAbility(TargetingRune rune)
+            : base(rune)
         {
             AddSubType("Targeting");
             AddSubTypeByEffects(rune.EffectsApplyToTarget);
@@ -99,12 +100,14 @@ namespace CongTDev.AbilitySystem
         public class SerializedTargetingAbility : SerializedObject
         {
             public string runeJson;
+
             public SerializedTargetingAbility() { }
 
             public SerializedTargetingAbility(TargetingAbility ability)
             {
                 runeJson = ability.Rune.ToWrappedJson();
             }
+
             public override object Deserialize()
             {
                 var rune = (TargetingRune)JsonHelper.WrappedJsonToObject(runeJson);
@@ -115,5 +118,4 @@ namespace CongTDev.AbilitySystem
         }
         #endregion
     }
-
 }

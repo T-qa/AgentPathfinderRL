@@ -1,7 +1,7 @@
-using CongTDev.AbilitySystem;
-using CongTDev.EventManagers;
 using System;
 using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +22,8 @@ public class PlayerController : BaseCombatCharactorController
 
     public static bool IsDead { get; private set; } = true;
 
-    [SerializeField] private BaseStatData statsData;
+    [SerializeField]
+    private BaseStatData statsData;
 
     private Camera _camera;
 
@@ -42,6 +43,7 @@ public class PlayerController : BaseCombatCharactorController
         _camera = CameraManager.MainCam;
         RevivePlayer();
     }
+
     private void Update()
     {
         AbilityCaster.LookDirection = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -62,21 +64,28 @@ public class PlayerController : BaseCombatCharactorController
     private IEnumerator AskForRevivePlayer()
     {
         yield return 2f.Wait();
-        ConfirmPanel.Ask("You are died and has lost 1 level.\n" +
-                        "Do you want to pay 1000G to play again?",
-        () => {
-            if (GameManager.PlayerGold >= 1000)
+        ConfirmPanel.Ask(
+            "You are died and has lost 1 level.\n" + "Do you want to pay 1000G to play again?",
+            () =>
             {
-                
-                GameManager.PlayerGold -= 1000;
-                ReviveDelay(GameManager.CurrentMap);
-            }
-            else
-            {
-                ConfirmPanel.Ask("You don't have enough gold!", () => ReviveDelay("Town"), () => ReviveDelay("Town"));
-            }
-        }, () => ReviveDelay("Town")); 
+                if (GameManager.PlayerGold >= 1000)
+                {
+                    GameManager.PlayerGold -= 1000;
+                    ReviveDelay(GameManager.CurrentMap);
+                }
+                else
+                {
+                    ConfirmPanel.Ask(
+                        "You don't have enough gold!",
+                        () => ReviveDelay("Town"),
+                        () => ReviveDelay("Town")
+                    );
+                }
+            },
+            () => ReviveDelay("Town")
+        );
     }
+
     private void ReviveDelay(string mapName)
     {
         StartCoroutine(ReviveDelayCoroutine(mapName));

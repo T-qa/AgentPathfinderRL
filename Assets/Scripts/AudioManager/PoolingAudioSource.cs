@@ -1,14 +1,15 @@
-﻿using CongTDev.ObjectPooling;
-using System;
+﻿using System;
 using System.Collections;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     public class PoolingAudioSource : PoolObject
     {
-        [SerializeField] private AudioSource audioSource;
+        [SerializeField]
+        private AudioSource audioSource;
 
         private Func<bool> _predicate;
         private Action _onComplete;
@@ -24,7 +25,10 @@ namespace CongTDev.AudioManagement
             }
         }
 
-        public virtual PoolingAudioSource Play(AudioClip audioClip, AudioMixerGroup mixerGroup = null)
+        public virtual PoolingAudioSource Play(
+            AudioClip audioClip,
+            AudioMixerGroup mixerGroup = null
+        )
         {
             _predicate = null;
             _onComplete = null;

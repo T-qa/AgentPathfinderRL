@@ -1,8 +1,8 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.IOSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public class Equipment : IItem
@@ -42,7 +42,7 @@ public class Equipment : IItem
 
     public void AddSubEffect(BaseEffectFactory subEffect)
     {
-        if(subEffect == null)
+        if (subEffect == null)
             return;
 
         subEffects.Add(subEffect);
@@ -106,6 +106,7 @@ public class Equipment : IItem
         Shoe,
         Shield
     }
+
     #region IOSystem
     public SerializedObject Serialize()
     {
@@ -141,7 +142,8 @@ public class Equipment : IItem
             var mainEffects = new BuffEffectFactory[mainEffectJsons.Length];
             for (int i = 0; i < mainEffects.Length; i++)
             {
-                mainEffects[i] = (BuffEffectFactory)JsonHelper.WrappedJsonToObject(mainEffectJsons[i]);
+                mainEffects[i] = (BuffEffectFactory)
+                    JsonHelper.WrappedJsonToObject(mainEffectJsons[i]);
             }
 
             var sourceInfo = (EquipmentFactory)JsonHelper.WrappedJsonToObject(sourceInfoJson);
@@ -149,7 +151,8 @@ public class Equipment : IItem
 
             foreach (var subEffectsJson in subEffectsJsons)
             {
-                var effectFactory = (BaseEffectFactory)JsonHelper.WrappedJsonToObject(subEffectsJson);
+                var effectFactory = (BaseEffectFactory)
+                    JsonHelper.WrappedJsonToObject(subEffectsJson);
                 equipment.AddSubEffect(effectFactory);
             }
 
@@ -159,5 +162,4 @@ public class Equipment : IItem
         public override SerializedType GetSerializedType() => SerializedType.Equipment;
     }
     #endregion
-
 }

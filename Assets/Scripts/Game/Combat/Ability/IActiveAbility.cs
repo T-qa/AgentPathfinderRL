@@ -1,4 +1,4 @@
-﻿namespace CongTDev.AbilitySystem
+﻿namespace Tqa.DungeonQuest.AbilitySystem
 {
     public interface IActiveAbility : IAbility
     {
@@ -14,6 +14,4 @@
         bool IsReady();
         Respond TryUse();
     }
-
 }
-

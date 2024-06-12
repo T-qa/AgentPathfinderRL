@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BaseStats
 {
-    [SerializeField] private float _baseValue;
+    [SerializeField]
+    private float _baseValue;
 
     public event Action<float> OnValueChange;
     private readonly List<StatModifier> _bonusStats = new();
@@ -15,7 +16,8 @@ public class BaseStats
         get => _baseValue;
         set
         {
-            if (value <= 0) value = 0;
+            if (value <= 0)
+                value = 0;
             _baseValue = value;
             CalculateFinalValue();
         }
@@ -71,8 +73,8 @@ public class BaseStats
             }
         }
         FinalValue = sumBonus + totalAddByPercent;
-        if (FinalValue < 0) FinalValue = 0;
+        if (FinalValue < 0)
+            FinalValue = 0;
         OnValueChange?.Invoke(FinalValue);
     }
 }
-

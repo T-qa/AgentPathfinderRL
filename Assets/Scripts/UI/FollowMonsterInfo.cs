@@ -1,12 +1,17 @@
-﻿using CongTDev.ObjectPooling;
-using TMPro;
+﻿using TMPro;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class FollowMonsterInfo : PoolObject
 {
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private Vector2 offset;
+    [SerializeField]
+    private TextMeshProUGUI nameText;
+
+    [SerializeField]
+    private TextMeshProUGUI levelText;
+
+    [SerializeField]
+    private Vector2 offset;
 
     private Vector2 _finalOffset;
     private MonstersController _attachedMonster;
@@ -21,7 +26,7 @@ public class FollowMonsterInfo : PoolObject
 
     private void LateUpdate()
     {
-        if( _attachedMonster != null )
+        if (_attachedMonster != null)
         {
             transform.position = _attachedMonster.Combat.Position + _finalOffset;
         }
@@ -31,5 +36,4 @@ public class FollowMonsterInfo : PoolObject
     {
         _attachedMonster = null;
     }
-
 }

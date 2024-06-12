@@ -1,12 +1,17 @@
-using CongTDev.IOSystem;
 using TMPro;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public class UserAvatar : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI usernameText;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI xpText;
+    [SerializeField]
+    private TextMeshProUGUI usernameText;
+
+    [SerializeField]
+    private TextMeshProUGUI levelText;
+
+    [SerializeField]
+    private TextMeshProUGUI xpText;
 
     private void OnEnable()
     {

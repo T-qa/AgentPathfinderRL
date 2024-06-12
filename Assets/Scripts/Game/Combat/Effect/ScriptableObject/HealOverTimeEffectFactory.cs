@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Effects", menuName = "Effects/Duration/Over time/Recorvery")]
     public class HealOverTimeEffectFactory : BaseEffectFactory
     {
-        [SerializeField] protected StatBasedValue basedValue;
+        [SerializeField]
+        protected StatBasedValue basedValue;
 
         [Tooltip("Time elapses between each tick of heal")]
-        [SerializeField] protected float healInterval;
+        [SerializeField]
+        protected float healInterval;
 
         public override IEffect Build()
         {
-             return new HealOverTimeEffect(this);
+            return new HealOverTimeEffect(this);
         }
 
         public class HealOverTimeEffect : IEffect
@@ -33,12 +35,7 @@ namespace CongTDev.AbilitySystem
                 // Do heal coroutine
             }
 
-            public void CleanUp()
-            {
-                
-            }
-
-            
+            public void CleanUp() { }
         }
     }
 }

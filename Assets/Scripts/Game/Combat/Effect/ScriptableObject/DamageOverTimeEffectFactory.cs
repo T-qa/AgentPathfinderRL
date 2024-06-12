@@ -2,17 +2,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Damage", menuName = "Effects/Duration/Over time/Damage")]
     public class DamageOverTimeEffectFactory : BaseEffectFactory
     {
-        [SerializeField] protected DamageType damageType;
-        [SerializeField] protected StatBasedValue basedValue;
+        [SerializeField]
+        protected DamageType damageType;
 
-        [SerializeField] protected float duration;
+        [SerializeField]
+        protected StatBasedValue basedValue;
+
+        [SerializeField]
+        protected float duration;
+
         [Tooltip("Time elapses between each tick of damage")]
-        [SerializeField] protected float damageInterval;
+        [SerializeField]
+        protected float damageInterval;
 
         public override IEffect Build()
         {

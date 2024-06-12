@@ -1,6 +1,6 @@
-﻿namespace CongTDev.Communicate
+﻿namespace Tqa.DungeonQuest.Communicate
 {
-    public class Mail 
+    public class Mail
     {
         public const int ATTACHED_SLOT_LIMIT = 5;
 

@@ -1,22 +1,30 @@
-﻿using CongTDev.ObjectPooling;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
     private const float CHECK_INTERVAL = 2f;
 
-    [SerializeField] private MonstersController monsterPrefab;
-    [SerializeField] private BaseStatData monsterStatData;
+    [SerializeField]
+    private MonstersController monsterPrefab;
 
-    [SerializeField] private float spawnRange;
+    [SerializeField]
+    private BaseStatData monsterStatData;
+
+    [SerializeField]
+    private float spawnRange;
     public int maxAmount;
-    [SerializeField] private int initialAmount;
-    [SerializeField] private float spawnDelay;
+
+    [SerializeField]
+    private int initialAmount;
+
+    [SerializeField]
+    private float spawnDelay;
 
     private ObjectPool _pool;
 
-    public int MaxAmount 
+    public int MaxAmount
     {
         get => maxAmount;
         set
@@ -41,13 +49,13 @@ public class MonsterSpawner : MonoBehaviour
     private IEnumerator SpawnCoroutine()
     {
         var nextSpawnTime = Time.time + spawnDelay;
-        while(true)
+        while (true)
         {
-            if(_pool.CountActive < maxAmount && Time.time > nextSpawnTime)
+            if (_pool.CountActive < maxAmount && Time.time > nextSpawnTime)
             {
                 const int maxTryTime = 15;
                 int tried = 0;
-                while(tried++ < maxTryTime)
+                while (tried++ < maxTryTime)
                 {
                     if (SpawnInRandomPosition())
                         break;
@@ -69,7 +77,7 @@ public class MonsterSpawner : MonoBehaviour
         if (Physics2D.OverlapPoint(spawnPosition, LayerMaskHelper.ObstacleMask))
             return false;
 
-        var monster = (MonstersController)_pool.Get();
+        var monster = (MonstersController)_pool.GetFromPool();
         monster.Initialize(monsterStatData);
         monster.transform.position = spawnPosition;
         return true;
@@ -80,6 +88,6 @@ public class MonsterSpawner : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, spawnRange);
-    } 
+    }
 #endif
 }

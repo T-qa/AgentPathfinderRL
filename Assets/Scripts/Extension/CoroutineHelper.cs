@@ -9,7 +9,8 @@ public static class CoroutineHelper
     public static readonly WaitForEndOfFrame endOfFrameWait = new();
 
     private static readonly Dictionary<float, WaitForSeconds> _secondsWaitMap = new();
-    private static readonly Dictionary<float, WaitForSecondsRealtime> _realtimeSecondsWaitMap = new();
+    private static readonly Dictionary<float, WaitForSecondsRealtime> _realtimeSecondsWaitMap =
+        new();
 
     /// <summary>
     /// Return WaitForSeconds object use for Coroutine
@@ -18,13 +19,13 @@ public static class CoroutineHelper
     {
         if (!_secondsWaitMap.TryGetValue(waitTime, out var wait))
         {
-            if(waitTime < Mathf.Epsilon)
+            if (waitTime < Mathf.Epsilon)
             {
                 return null;
             }
             wait = new(waitTime);
             _secondsWaitMap[waitTime] = wait;
-            if(_secondsWaitMap.Count > MAX_INTANCE_COUNT)
+            if (_secondsWaitMap.Count > MAX_INTANCE_COUNT)
             {
                 _secondsWaitMap.Clear();
             }
@@ -49,5 +50,4 @@ public static class CoroutineHelper
         }
         return wait;
     }
-
 }

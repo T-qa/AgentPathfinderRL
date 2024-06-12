@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace CongTDev.Communicate
+namespace Tqa.DungeonQuest.Communicate
 {
     public class MailBox : GlobalReference<MailBox>
     {
-        [SerializeField] private MailBoxDislayer dislayer;
+        [SerializeField]
+        private MailBoxDislayer dislayer;
 
-        [SerializeField] private MailContainer mailContainerPrefab;
-        [SerializeField] private Transform containerParent;
+        [SerializeField]
+        private MailContainer mailContainerPrefab;
 
-        [SerializeField] private List<MailContainer> mailContainers;
+        [SerializeField]
+        private Transform containerParent;
+
+        [SerializeField]
+        private List<MailContainer> mailContainers;
 
         public void ReceiveMail(Mail mail)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.ObjectPooling
+namespace Tqa.DungeonQuest.ObjectPooling
 {
     public class PrefixPool : MonoBehaviour
     {
@@ -14,7 +14,8 @@ namespace CongTDev.ObjectPooling
             public int amount;
         }
 
-        [SerializeField] private List<PoolInfo> poolInfos;
+        [SerializeField]
+        private List<PoolInfo> poolInfos;
 
         private void Start()
         {

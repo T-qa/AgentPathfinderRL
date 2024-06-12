@@ -5,27 +5,30 @@ public class PlayerInteract : MonoBehaviour
 {
     private static IInteractable _currentAssigned;
 
-    public static void Assign<T>(T interactable) where T : MonoBehaviour, IInteractable
+    public static void Assign<T>(T interactable)
+        where T : MonoBehaviour, IInteractable
     {
-        if((MonoBehaviour)_currentAssigned != null)
+        if ((MonoBehaviour)_currentAssigned != null)
         {
             _currentAssigned.OnCancelAssigned();
         }
-        
+
         _currentAssigned = interactable;
         interactable.OnAssigned();
     }
 
-    public static void CancelAssign<T>(T interactable) where T : MonoBehaviour, IInteractable
+    public static void CancelAssign<T>(T interactable)
+        where T : MonoBehaviour, IInteractable
     {
-        if(IsCurrentAssined(interactable))
+        if (IsCurrentAssined(interactable))
         {
             _currentAssigned.OnCancelAssigned();
             _currentAssigned = null;
         }
     }
 
-    public static bool IsCurrentAssined<T>(T interactable) where T : MonoBehaviour, IInteractable
+    public static bool IsCurrentAssined<T>(T interactable)
+        where T : MonoBehaviour, IInteractable
     {
         return interactable == (MonoBehaviour)_currentAssigned;
     }
@@ -42,9 +45,6 @@ public class PlayerInteract : MonoBehaviour
 
     public void InteractWithCurrent(InputAction.CallbackContext _)
     {
-        if(_currentAssigned != null)
-        {
-            _currentAssigned.Interact();
-        }
+        _currentAssigned?.Interact();
     }
 }

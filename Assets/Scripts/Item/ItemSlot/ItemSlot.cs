@@ -1,12 +1,23 @@
-using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class ItemSlot<T> : MonoBehaviour, IItemSlot, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDropHandler, IEndDragHandler, IDragHandler, IPointerClickHandler where T : class, IItem
+public abstract class ItemSlot<T>
+    : MonoBehaviour,
+        IItemSlot,
+        IPointerEnterHandler,
+        IPointerExitHandler,
+        IBeginDragHandler,
+        IDropHandler,
+        IEndDragHandler,
+        IDragHandler,
+        IPointerClickHandler
+    where T : class, IItem
 {
-    [SerializeField] protected Image iconUI;
+    [SerializeField]
+    protected Image iconUI;
 
     public IItem BaseItem => Item;
     public T Item { get; private set; }
@@ -16,17 +27,18 @@ public abstract class ItemSlot<T> : MonoBehaviour, IItemSlot, IPointerEnterHandl
     public bool HasIconUI => iconUI != null;
 
     public abstract bool IsMeetSlotRequiment(IItem item);
+
     protected virtual void OnItemGetIn(T item)
     {
         item.OnDestroy += ClearSlot;
 
-        if(HasIconUI)
+        if (HasIconUI)
         {
             iconUI.gameObject.SetActive(true);
             iconUI.sprite = Item.Icon;
         }
-        
     }
+
     protected virtual void OnItemGetOut(T item)
     {
         item.OnDestroy -= ClearSlot;
@@ -35,10 +47,12 @@ public abstract class ItemSlot<T> : MonoBehaviour, IItemSlot, IPointerEnterHandl
             iconUI.gameObject.SetActive(false);
         }
     }
+
     protected virtual void OnSlotRightCliked()
     {
         EventManager<IItemSlot>.RaiseEvent("OnSlotPointerExit", this);
     }
+
     protected virtual void OnSlotLeftCliked()
     {
         EventManager<IItemSlot>.RaiseEvent("OnSlotPointerExit", this);
@@ -131,5 +145,4 @@ public abstract class ItemSlot<T> : MonoBehaviour, IItemSlot, IPointerEnterHandl
     }
 
     public void OnDrag(PointerEventData eventData) { }
-
 }

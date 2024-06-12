@@ -1,21 +1,24 @@
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
 using System.Collections.Generic;
 using TMPro;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.Communicate
+namespace Tqa.DungeonQuest.Communicate
 {
     public class Messenger : MonoBehaviour
     {
         public const string SEND_SYSTEM_MESSAGE = "SendSystemMessage";
 
-        [SerializeField] private TMP_InputField playerInput;
+        [SerializeField]
+        private TMP_InputField playerInput;
 
-        [SerializeField] private Message messagePrefab;
+        [SerializeField]
+        private Message messagePrefab;
 
-        [SerializeField] private Transform contentPanel;
+        [SerializeField]
+        private Transform contentPanel;
 
         private ObjectPool messagePool;
 
@@ -38,7 +41,7 @@ namespace CongTDev.Communicate
             if (string.IsNullOrEmpty(playerInput.text))
                 return;
 
-            if(CheatCode.IsCheatAllow)
+            if (CheatCode.IsCheatAllow)
             {
                 CheatCode.TryApplyCheat(playerInput.text);
             }
@@ -60,7 +63,7 @@ namespace CongTDev.Communicate
 
         private Message GetMessage()
         {
-            var messageUI = (Message)messagePool.Get();
+            var messageUI = (Message)messagePool.GetFromPool();
             messageUI.transform.SetParent(contentPanel);
             activeMessage.Enqueue(messageUI);
             TrimMessage(20);
@@ -71,6 +74,7 @@ namespace CongTDev.Communicate
         {
             InputCentral.Disable();
         }
+
         public void OnDeselected()
         {
             InputCentral.Enable();

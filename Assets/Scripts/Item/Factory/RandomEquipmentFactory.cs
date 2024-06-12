@@ -1,17 +1,19 @@
-﻿using CongTDev.AbilitySystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Equipment", menuName = "Item/RandomStatEquipment")]
 public class RandomEquipmentFactory : EquipmentFactory
 {
-    [SerializeField] private List<RandomChanceEffect> randomEffects;
+    [SerializeField]
+    private List<RandomChanceEffect> randomEffects;
 
     [Serializable]
     public struct RandomChanceEffect
     {
         public BaseEffectFactory effectFactory;
+
         [Range(0, 100)]
         public float chanceToAppear;
     }
@@ -21,7 +23,7 @@ public class RandomEquipmentFactory : EquipmentFactory
         var equipment = new Equipment(this, MainStats.ToArray());
         foreach (var ramdonEffect in randomEffects)
         {
-            if(Chance.TryOnPercent(ramdonEffect.chanceToAppear))
+            if (Chance.TryOnPercent(ramdonEffect.chanceToAppear))
             {
                 equipment.AddSubEffect(ramdonEffect.effectFactory);
             }

@@ -15,9 +15,7 @@ public class StatModifier : IComparable<StatModifier>
     public readonly int order;
 
     public StatModifier(float value, BonusType bonusType)
-        : this(value, bonusType, (int)bonusType)
-    {
-    }
+        : this(value, bonusType, (int)bonusType) { }
 
     public StatModifier(float value, BonusType bonusType, int order)
     {

@@ -1,12 +1,16 @@
-using CongTDev.AudioManagement;
+using Tqa.DungeonQuest.AudioManagement;
 using UnityEngine;
 
 public class TownDoor : BaseInteractable
 {
-    [SerializeField] private GameObject openingDoor;
-    [SerializeField] private GameObject closingDoor;
+    [SerializeField]
+    private GameObject openingDoor;
 
-    [SerializeField] private bool defaultOpen;
+    [SerializeField]
+    private GameObject closingDoor;
+
+    [SerializeField]
+    private bool defaultOpen;
 
     private bool _isOpening;
 

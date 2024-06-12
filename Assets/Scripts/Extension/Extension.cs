@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public static class Extension
 {
-
     public static Action WrapAction<T>(this Action<T> action, T parameter)
     {
         return () => action?.Invoke(parameter);
@@ -19,7 +18,11 @@ public static class Extension
 
 public static class VectorHelper
 {
-    public static List<Vector2> SpreadDirectionCenter(Vector2 direction, int count, float spreadAngle)
+    public static List<Vector2> SpreadDirectionCenter(
+        Vector2 direction,
+        int count,
+        float spreadAngle
+    )
     {
         float fireAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         fireAngle += spreadAngle / 2;
@@ -34,6 +37,7 @@ public static class VectorHelper
         }
         return result;
     }
+
     public static List<Vector2> SpreadDirectionAdd(Vector2 direction, int count, float spreadAngle)
     {
         float fireAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

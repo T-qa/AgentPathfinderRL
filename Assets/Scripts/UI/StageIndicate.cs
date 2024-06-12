@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class StageIndicate : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI stageText;
-    [SerializeField] private Animator anim;
+    [SerializeField]
+    private TextMeshProUGUI stageText;
 
-    [SerializeField] private string startText;
-    [SerializeField] private string endText;
+    [SerializeField]
+    private Animator anim;
+
+    [SerializeField]
+    private string startText;
+
+    [SerializeField]
+    private string endText;
 
     public void IndicateStageStart()
     {

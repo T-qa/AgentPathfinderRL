@@ -1,8 +1,8 @@
 ﻿public static class InputCentral
 {
-    private static InputActions inputActions;
+    private static InputActions _inputActions;
 
-    public static InputActions InputActions => inputActions ??= new();
+    public static InputActions InputActions => _inputActions ??= new();
 
     public static void Enable()
     {

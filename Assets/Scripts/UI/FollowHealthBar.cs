@@ -1,11 +1,14 @@
-using CongTDev.ObjectPooling;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FollowHealthBar : PoolObject
 {
-    [SerializeField] private Image fillImage;
-    [SerializeField] private Vector2 offset;
+    [SerializeField]
+    private Image fillImage;
+
+    [SerializeField]
+    private Vector2 offset;
 
     private Vector2 _finalOffset;
     private Fighter _attachedFighter;

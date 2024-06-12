@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class FollowTransform : MonoBehaviour
 {
-
     [SerializeField]
     private Transform followTransfrom;
 

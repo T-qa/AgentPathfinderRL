@@ -3,21 +3,28 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CongTDev.TheBoss
+namespace Tqa.DungeonQuest.TheBoss
 {
     public class BossAIController : MonoBehaviour
     {
         private const float WAIT_UPDATE_INTERVAL = 1f;
 
         [Header("BasicReference")]
-        [SerializeField] private Animator animator;
-        [SerializeField] private BossAICombatHandler combatHandler;
+        [SerializeField]
+        private Animator animator;
+
+        [SerializeField]
+        private BossAICombatHandler combatHandler;
 
         [Header("Prepare state field")]
-        [SerializeField] private float detectRange;
+        [SerializeField]
+        private float detectRange;
 
-        [field: SerializeField] public UnityEvent OnStartCombat { get; private set; }
-        [field: SerializeField] public UnityEvent OnEndCombat { get; private set; }
+        [field: SerializeField]
+        public UnityEvent OnStartCombat { get; private set; }
+
+        [field: SerializeField]
+        public UnityEvent OnEndCombat { get; private set; }
 
         private void Start()
         {
@@ -65,6 +72,5 @@ namespace CongTDev.TheBoss
             Gizmos.DrawWireSphere(transform.position, detectRange);
         }
 #endif
-
     }
 }

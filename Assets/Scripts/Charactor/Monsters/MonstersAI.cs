@@ -4,17 +4,25 @@ using UnityEngine;
 public class MonstersAI : SeekerMovingAI
 {
     [Header("Monster AI fields")]
-    [SerializeField] private float moveRange;
-    [SerializeField] private float directChangeInterval;
-    [SerializeField] private float detectRange;
+    [SerializeField]
+    private float moveRange;
+
+    [SerializeField]
+    private float directChangeInterval;
+
+    [SerializeField]
+    private float detectRange;
+
     [Min(0.1f)]
-    [SerializeField] private float updateInterval;
+    [SerializeField]
+    private float updateInterval;
 
     private BaseAICombatBehaviour _combatBehaviour;
 
     public Vector2 StartPosition { get; protected set; }
 
-    [field: SerializeField] public MonstersController Controller { get; private set; }
+    [field: SerializeField]
+    public MonstersController Controller { get; private set; }
 
     public Fighter Player { get; private set; }
     public Vector2 PlayerPosition => Player.HitBox.bounds.center;
@@ -120,5 +128,4 @@ public class MonstersAI : SeekerMovingAI
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 #endif
-
 }

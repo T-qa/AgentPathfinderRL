@@ -1,14 +1,16 @@
-﻿using CongTDev.AbilitySystem;
+﻿using System.Collections;
 using DG.Tweening;
-using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ActiveAbilitySlot : ItemSlot<IActiveAbility>
 {
-    [SerializeField] private Image cooldownMask;
+    [SerializeField]
+    private Image cooldownMask;
 
-    [SerializeField] private Image backGround;
+    [SerializeField]
+    private Image backGround;
 
     private Tween _tween;
 
@@ -25,7 +27,7 @@ public class ActiveAbilitySlot : ItemSlot<IActiveAbility>
         {
             backGround.gameObject.SetActive(false);
         }
-        if(!Item.IsReady())
+        if (!Item.IsReady())
         {
             RunCooldownAnim();
         }

@@ -1,4 +1,4 @@
-﻿using CongTDev.EventManagers;
+﻿using Tqa.DungeonQuest.EventManagers;
 
 public class ChestSlot : ItemSlot<IItem>
 {

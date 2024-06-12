@@ -1,13 +1,10 @@
-using CongTDev.ObjectPooling;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public interface ISpell : IPoolObject
     {
         void KickOff(OrientationAbility ability, Vector2 direction);
     }
-
-
 }
-

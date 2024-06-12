@@ -1,11 +1,11 @@
-﻿using CongTDev.AbilitySystem.Spell;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CongTDev.ObjectPooling
+namespace Tqa.DungeonQuest.ObjectPooling
 {
     [RequireComponent(typeof(IPoolObject))]
     public class Prefab : MonoBehaviour
     {
-        [field: SerializeField] public string UniquePrefabID { get; private set; }
+        [field: SerializeField]
+        public string UniquePrefabID { get; private set; }
     }
 }

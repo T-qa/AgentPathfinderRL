@@ -1,12 +1,15 @@
-﻿using Pathfinding;
-using System.Collections;
+﻿using System.Collections;
+using Pathfinding;
 using UnityEngine;
 
 public abstract class SeekerMovingAI : BaseMovementInput
 {
     [Header("Seeker moving fields")]
-    [SerializeField] private Seeker seeker;
-    [SerializeField] private float nextWaypointDistance;
+    [SerializeField]
+    private Seeker seeker;
+
+    [SerializeField]
+    private float nextWaypointDistance;
 
     private Path _path;
     private Coroutine _movingRoutine;
@@ -20,7 +23,7 @@ public abstract class SeekerMovingAI : BaseMovementInput
         {
             if (p.error)
                 return;
- 
+
             _path = p;
             if (_movingRoutine != null)
             {
@@ -49,7 +52,7 @@ public abstract class SeekerMovingAI : BaseMovementInput
             InputVector = direction;
             yield return CoroutineHelper.fixedUpdateWait;
             var distance = Vector2.Distance(transform.position, _path.vectorPath[currentPoint]);
-            if(distance < nextWaypointDistance)
+            if (distance < nextWaypointDistance)
             {
                 currentPoint++;
             }

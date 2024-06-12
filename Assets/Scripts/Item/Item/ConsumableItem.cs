@@ -1,10 +1,10 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AudioManagement;
-using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class ConsumableItem : IItem, IStackableItem, IUsableItem
@@ -39,7 +39,7 @@ public class ConsumableItem : IItem, IStackableItem, IUsableItem
         {
             _count = value;
             OnCountChange?.Invoke();
-            if(_count == 0)
+            if (_count == 0)
             {
                 OnDestroy?.Invoke();
             }
@@ -86,7 +86,7 @@ public class ConsumableItem : IItem, IStackableItem, IUsableItem
 
     private void TryPlaySFX()
     {
-        if(string.IsNullOrEmpty(sourceItem.SFXWhenUse))
+        if (string.IsNullOrEmpty(sourceItem.SFXWhenUse))
             return;
 
         AudioManager.Play(sourceItem.SFXWhenUse);
@@ -138,7 +138,6 @@ public class ConsumableItem : IItem, IStackableItem, IUsableItem
         OnDestroy?.Invoke();
     }
 
-
     #region IOSystem
     public SerializedObject Serialize()
     {
@@ -149,6 +148,7 @@ public class ConsumableItem : IItem, IStackableItem, IUsableItem
     {
         public string sourceItemJson;
         public int count;
+
         public SerializedConsumableItem(ConsumableItem consumableItem)
         {
             count = consumableItem.Count;
@@ -158,10 +158,7 @@ public class ConsumableItem : IItem, IStackableItem, IUsableItem
         public override object Deserialize()
         {
             var sourceInfo = (ConsumableItemFactory)JsonHelper.WrappedJsonToObject(sourceItemJson);
-            var consumableItem = new ConsumableItem(sourceInfo)
-            {
-                Count = count
-            };
+            var consumableItem = new ConsumableItem(sourceInfo) { Count = count };
             return consumableItem;
         }
 

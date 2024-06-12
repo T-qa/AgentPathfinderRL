@@ -4,12 +4,20 @@ using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private Fighter player;
+    [SerializeField]
+    private Fighter player;
 
-    [SerializeField] private Image healthImage;
-    [SerializeField] private Image manaImage;
-    [SerializeField] private Image xpImage;
-    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField]
+    private Image healthImage;
+
+    [SerializeField]
+    private Image manaImage;
+
+    [SerializeField]
+    private Image xpImage;
+
+    [SerializeField]
+    private TextMeshProUGUI levelText;
 
     private void OnEnable()
     {
@@ -20,12 +28,11 @@ public class PlayerStatus : MonoBehaviour
 
         PlayerLevelSystem.OnValueChange += UpdateLevelValue;
         UpdateLevelValue();
-
     }
 
     private void OnDisable()
     {
-        if(player != null)
+        if (player != null)
         {
             player.Health.OnValueChange -= UpdateHealthValue;
             player.Mana.OnValueChange -= UpdateManaValue;
@@ -43,6 +50,7 @@ public class PlayerStatus : MonoBehaviour
     {
         ChangeUI(current, max, healthImage);
     }
+
     private void UpdateManaValue(float current, float max)
     {
         ChangeUI(current, max, manaImage);
@@ -50,7 +58,8 @@ public class PlayerStatus : MonoBehaviour
 
     private void ChangeUI(float current, float max, Image fillImage)
     {
-        if (max == 0) return;
+        if (max == 0)
+            return;
         fillImage.fillAmount = current / max;
     }
 }

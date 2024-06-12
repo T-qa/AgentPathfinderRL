@@ -3,10 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Consumable", menuName = "Item/ConsumableRandomAmount")]
 public class RandomAmountConsumableFactory : BaseItemFactory
 {
-    [SerializeField] private ConsumableItemFactory consumableFactory;
+    [SerializeField]
+    private ConsumableItemFactory consumableFactory;
 
-    [SerializeField] private int minAmount;
-    [SerializeField] private int maxAmount;
+    [SerializeField]
+    private int minAmount;
+
+    [SerializeField]
+    private int maxAmount;
 
     public override IItem CreateItem()
     {
@@ -21,5 +25,4 @@ public class RandomAmountConsumableFactory : BaseItemFactory
         }
         return item;
     }
-
 }

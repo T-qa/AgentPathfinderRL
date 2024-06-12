@@ -1,14 +1,17 @@
-﻿using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
-using System;
+﻿using System;
 using System.Collections;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemEventHandler : MonoBehaviour
 {
-    [SerializeField] private ItemTooltip itemToolTip;
-    [SerializeField] private Image draggingImage;
+    [SerializeField]
+    private ItemTooltip itemToolTip;
+
+    [SerializeField]
+    private Image draggingImage;
 
     private IItemSlot _onDraggingSlot;
     private bool _isDragging;
@@ -32,7 +35,10 @@ public class ItemEventHandler : MonoBehaviour
         EventManager<IItemSlot>.AddListener("OnSlotDrop", OnItemDrop);
         EventManager<IItemSlot>.AddListener("OnSlotEndDrag", OnSlotEndDrag);
 
-        EventManager<ObjectHolder<IItemSlot>>.AddListener("RequestCurrentDraggingSlot", SendCurrentDraggingSlot);
+        EventManager<ObjectHolder<IItemSlot>>.AddListener(
+            "RequestCurrentDraggingSlot",
+            SendCurrentDraggingSlot
+        );
     }
 
     private void UnsubscribeEvent()
@@ -44,7 +50,10 @@ public class ItemEventHandler : MonoBehaviour
         EventManager<IItemSlot>.RemoveListener("OnSlotDrop", OnItemDrop);
         EventManager<IItemSlot>.RemoveListener("OnSlotEndDrag", OnSlotEndDrag);
 
-        EventManager<ObjectHolder<IItemSlot>>.RemoveListener("RequestCurrentDraggingSlot", SendCurrentDraggingSlot);
+        EventManager<ObjectHolder<IItemSlot>>.RemoveListener(
+            "RequestCurrentDraggingSlot",
+            SendCurrentDraggingSlot
+        );
     }
 
     private void ShowTip(IItemSlot itemSlot)
@@ -85,7 +94,11 @@ public class ItemEventHandler : MonoBehaviour
 
         AudioManager.Play("PutDownItem");
 
-        if (_onDraggingSlot.BaseItem is IStackableItem source && itemSlot.BaseItem is IStackableItem dest && IStackableItem.TryStackItem(source, dest))
+        if (
+            _onDraggingSlot.BaseItem is IStackableItem source
+            && itemSlot.BaseItem is IStackableItem dest
+            && IStackableItem.TryStackItem(source, dest)
+        )
             return;
 
         if (IItemSlot.Swap(_onDraggingSlot, itemSlot))
@@ -105,5 +118,4 @@ public class ItemEventHandler : MonoBehaviour
     {
         holder.value = _onDraggingSlot;
     }
-
 }

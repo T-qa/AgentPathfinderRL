@@ -1,10 +1,10 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine.InputSystem;
 
 public class InventorySlot : ItemSlot<IItem>
@@ -14,37 +14,41 @@ public class InventorySlot : ItemSlot<IItem>
 
     private static OptionBox _optionBox;
 
-    private static readonly IReadOnlyDictionary<string, IEnumerable<KeyValuePair<string, Action<InventorySlot>>>> _clickActionMaps
-        = new Dictionary<string, IEnumerable<KeyValuePair<string, Action<InventorySlot>>>>()
+    private static readonly IReadOnlyDictionary<
+        string,
+        IEnumerable<KeyValuePair<string, Action<InventorySlot>>>
+    > _clickActionMaps = new Dictionary<
+        string,
+        IEnumerable<KeyValuePair<string, Action<InventorySlot>>>
+    >()
     {
         {
-            ConsumableItem.ITEM_TYPE , new Dictionary<string, Action<InventorySlot>>()
-            {
-                { "Use", UseItem },
-                { "Drop", Drop }
-            }
+            ConsumableItem.ITEM_TYPE,
+            new Dictionary<string, Action<InventorySlot>>() { { "Use", UseItem }, { "Drop", Drop } }
         },
         {
-            Equipment.ITEM_TYPE , new Dictionary<string, Action<InventorySlot>>()
+            Equipment.ITEM_TYPE,
+            new Dictionary<string, Action<InventorySlot>>()
             {
                 { "Equip", EquipEquipment },
                 { "Drop", Drop }
-
             }
         },
         {
-           IAbility.ITEM_TYPE , new Dictionary<string, Action<InventorySlot>>()
-           {
-               { "Equip", EquipAbility },
-               { "Discard", Drop }
-           }
+            IAbility.ITEM_TYPE,
+            new Dictionary<string, Action<InventorySlot>>()
+            {
+                { "Equip", EquipAbility },
+                { "Discard", Drop }
+            }
         },
         {
-           Rune.ITEM_TYPE , new Dictionary<string, Action<InventorySlot>>()
-           {
-               { "Learn", LearnAbility },
-               { "Drop", Drop }
-           }
+            Rune.ITEM_TYPE,
+            new Dictionary<string, Action<InventorySlot>>()
+            {
+                { "Learn", LearnAbility },
+                { "Drop", Drop }
+            }
         }
     };
 
@@ -89,16 +93,17 @@ public class InventorySlot : ItemSlot<IItem>
         if (slot.Item is not Rune rune)
             return;
 
-
         if (GameManager.PlayerGold >= rune.LearnCost)
         {
-            ConfirmPanel.Ask($"Do you want to learn this ability with cost: {rune.LearnCost} G",
-                    () =>
-                    {
-                        GameManager.PlayerGold -= rune.LearnCost;
-                        AudioManager.Play("BuySell");
-                        slot.PushItem(rune.CreateItem());
-                    });
+            ConfirmPanel.Ask(
+                $"Do you want to learn this ability with cost: {rune.LearnCost} G",
+                () =>
+                {
+                    GameManager.PlayerGold -= rune.LearnCost;
+                    AudioManager.Play("BuySell");
+                    slot.PushItem(rune.CreateItem());
+                }
+            );
         }
         else
         {
@@ -149,7 +154,9 @@ public class InventorySlot : ItemSlot<IItem>
         }
     }
 
-    private IEnumerator SelectionCoroutine(IEnumerable<KeyValuePair<string, Action<InventorySlot>>> actionMap)
+    private IEnumerator SelectionCoroutine(
+        IEnumerable<KeyValuePair<string, Action<InventorySlot>>> actionMap
+    )
     {
         if (_optionBox == null)
             yield break;
@@ -165,6 +172,5 @@ public class InventorySlot : ItemSlot<IItem>
             }
             yield return null;
         }
-
     }
 }

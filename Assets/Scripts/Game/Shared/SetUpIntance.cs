@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class SetUpIntance : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> intances;
+    [SerializeField]
+    private List<GameObject> intances;
 
     private void Awake()
     {
         foreach (GameObject intance in intances)
         {
-            if(!intance.activeSelf)
+            if (!intance.activeSelf)
             {
                 intance.SetActive(true);
                 intance.SetActive(false);

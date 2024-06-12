@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "BuffDeBuff", menuName = "Effects/Duration/BuffDeBuff")]
     public class DurationBuffEffectFactory : BuffEffectFactory
     {
-        [SerializeField] private float _duration;
+        [SerializeField]
+        private float _duration;
 
         public override IEffect Build()
         {
@@ -18,7 +19,9 @@ namespace CongTDev.AbilitySystem
             private readonly float _duration;
             private Coroutine _countdownRoutine;
             private Fighter _target;
-            public DurationBuffEffect(BuffEffectFactory effectFactory, float duration) : base(effectFactory)
+
+            public DurationBuffEffect(BuffEffectFactory effectFactory, float duration)
+                : base(effectFactory)
             {
                 _duration = duration;
             }

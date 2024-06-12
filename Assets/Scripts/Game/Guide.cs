@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Guide : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private List<GameObject> guides;
+    [SerializeField]
+    private List<GameObject> guides;
 
     private int _currentGuide = 0;
 
@@ -14,7 +15,7 @@ public class Guide : MonoBehaviour, IPointerClickHandler
         if (guides.Count == 0)
             Destroy(gameObject);
 
-        guides[0].gameObject.SetActive(true);
+        guides[0].SetActive(true);
     }
 
     private void OnDestroy()
@@ -29,7 +30,7 @@ public class Guide : MonoBehaviour, IPointerClickHandler
 
     private void MoveToMextGuide()
     {
-        guides[_currentGuide++].gameObject.SetActive(false);
+        guides[_currentGuide++].SetActive(false);
 
         if (_currentGuide >= guides.Count)
         {
@@ -37,7 +38,7 @@ public class Guide : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            guides[_currentGuide].gameObject.SetActive(true);
+            guides[_currentGuide].SetActive(true);
         }
     }
 }

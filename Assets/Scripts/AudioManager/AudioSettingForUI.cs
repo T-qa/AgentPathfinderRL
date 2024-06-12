@@ -1,23 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     public class AudioSettingForUI : MonoBehaviour
     {
-        [SerializeField] private Slider masterSlider;
-        [SerializeField] private Slider musicSlider;
-        [SerializeField] private Slider sfxSlider;
-        [SerializeField] private Slider uiSlider;
+        [SerializeField]
+        private Slider masterSlider;
+
+        [SerializeField]
+        private Slider musicSlider;
+
+        [SerializeField]
+        private Slider sfxSlider;
+
+        [SerializeField]
+        private Slider uiSlider;
 
         private void OnEnable()
         {
-            if(masterSlider != null)
+            if (masterSlider != null)
             {
                 masterSlider.value = AudioManager.MasterVolume;
                 masterSlider.onValueChanged.AddListener(OnMasterSliderChange);
             }
-            if(musicSlider != null)
+            if (musicSlider != null)
             {
                 musicSlider.value = AudioManager.MusicVolume;
                 musicSlider.onValueChanged.AddListener(OnMusicSliderChange);
@@ -68,6 +75,7 @@ namespace CongTDev.AudioManagement
         {
             AudioManager.SFXVolume = value;
         }
+
         public void OnUIliderChange(float value)
         {
             AudioManager.UIVolume = value;

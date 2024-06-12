@@ -1,12 +1,12 @@
-﻿using CongTDev.AbilitySystem;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Equipment", menuName = "Item/BasicEquipment")]
 public class BasicEquipmentFactory : EquipmentFactory
 {
-
-    [SerializeField] private List<BaseEffectFactory> subEffects;
+    [SerializeField]
+    private List<BaseEffectFactory> subEffects;
 
     public override IItem CreateItem()
     {

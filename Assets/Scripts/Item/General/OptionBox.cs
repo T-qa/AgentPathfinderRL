@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class OptionBox : MonoBehaviour
 {
-    [SerializeField] private SelectOption prefab;
+    [SerializeField]
+    private SelectOption prefab;
     private List<SelectOption> _selectOptions = new();
     private Action _onComplete;
 

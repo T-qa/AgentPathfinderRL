@@ -1,14 +1,16 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.ObjectPooling;
+﻿using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class BossLazerSpellCenter : PoolObject, ISpell
 {
-    [SerializeField] private Prefab lazerSpellPrefab;
+    [SerializeField]
+    private Prefab lazerSpellPrefab;
 
     [Min(1)]
-    [SerializeField] private int count;
+    [SerializeField]
+    private int count;
 
     public void KickOff(OrientationAbility ability, Vector2 direction)
     {
@@ -20,7 +22,6 @@ public class BossLazerSpellCenter : PoolObject, ISpell
             {
                 lazerSpell.SetBehaviour(BossLazerSpell.Behaviour.RotateAround);
                 lazerSpell.KickOff(ability, directions[i]);
-
             }
         }
         ReturnToPool();

@@ -1,7 +1,7 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AudioManagement;
-using CongTDev.Communicate;
-using CongTDev.IOSystem;
+﻿using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.Communicate;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public static class CheatCode
@@ -28,10 +28,13 @@ public static class CheatCode
                 GetEquipmentCheat(code[1]);
                 break;
             case "/Goto":
-                ConfirmPanel.Ask("You are going to teleport", () => GameManager.Instance.ChangeMap(code[1]));
+                ConfirmPanel.Ask(
+                    "You are going to teleport",
+                    () => GameManager.Instance.ChangeMap(code[1])
+                );
                 break;
             case "/GetGold":
-                if(int.TryParse(code[1], out var gold))
+                if (int.TryParse(code[1], out var gold))
                 {
                     ReceiveGold(gold);
                 }
@@ -78,6 +81,5 @@ public static class CheatCode
             GameManager.PlayerGold += gold;
             AudioManager.Play("BuySell");
         }
-        
     }
 }

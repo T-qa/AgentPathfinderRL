@@ -1,15 +1,18 @@
-using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.AudioManagement;
-using CongTDev.ObjectPooling;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.TheBoss
+namespace Tqa.DungeonQuest.TheBoss
 {
     public class BossHandFireCenter : PoolObject, ISpell
     {
-        [SerializeField] private Prefab handFirePrefab;
-        [SerializeField] private int projectileCount;
+        [SerializeField]
+        private Prefab handFirePrefab;
+
+        [SerializeField]
+        private int projectileCount;
 
         public void KickOff(OrientationAbility ability, Vector2 _)
         {

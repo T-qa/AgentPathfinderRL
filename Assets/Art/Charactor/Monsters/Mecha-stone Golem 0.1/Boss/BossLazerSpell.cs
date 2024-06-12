@@ -1,19 +1,29 @@
-using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.AudioManagement;
-using CongTDev.ObjectPooling;
 using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class BossLazerSpell : PoolObject, ISpell
 {
-    [SerializeField] private float startSpellOffset = 1f;
-    [SerializeField] private float duration = 5f;
-    [SerializeField] private float damageInterval = 0.4f;
-    [SerializeField] private float rotateDelta = 0.1f;
-    [SerializeField] private Behaviour behaviour = Behaviour.RotateAround;
+    [SerializeField]
+    private float startSpellOffset = 1f;
 
-    [SerializeField] private Collider2D collider2d;
+    [SerializeField]
+    private float duration = 5f;
+
+    [SerializeField]
+    private float damageInterval = 0.4f;
+
+    [SerializeField]
+    private float rotateDelta = 0.1f;
+
+    [SerializeField]
+    private Behaviour behaviour = Behaviour.RotateAround;
+
+    [SerializeField]
+    private Collider2D collider2d;
 
     private OrientationAbility _ability;
     private Fighter _target;
@@ -59,7 +69,11 @@ public class BossLazerSpell : PoolObject, ISpell
 
     private void RotateToDirection(Vector2 direction)
     {
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        transform.rotation = Quaternion.Euler(
+            0,
+            0,
+            Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg
+        );
     }
 
     private IEnumerator LazerFiring()
@@ -107,10 +121,13 @@ public class BossLazerSpell : PoolObject, ISpell
         {
             var targetDirection = _target.Position - (Vector2)transform.position;
             var targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-            targetAngle = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, targetAngle, rotateDelta);
+            targetAngle = Mathf.MoveTowardsAngle(
+                transform.rotation.eulerAngles.z,
+                targetAngle,
+                rotateDelta
+            );
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
             yield return CoroutineHelper.fixedUpdateWait;
         }
     }
-
 }

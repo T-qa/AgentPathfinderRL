@@ -1,17 +1,30 @@
-using CongTDev.AudioManagement;
+using Tqa.DungeonQuest.AudioManagement;
 using UnityEngine;
 
 public class LootChest : BaseInteractable
 {
     public const int CAPACITY = 9;
 
-    [SerializeField] private BaseItemFactory[] randomFactorys;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite unblockedSprite;
-    [SerializeField] private Sprite emptyChestSprite;
-    [SerializeField] private BaseIndicator unblockedIndicator;
-    [SerializeField] private int minGoldReceive;
-    [SerializeField] private int maxGoldReceive;
+    [SerializeField]
+    private BaseItemFactory[] randomFactorys;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private Sprite unblockedSprite;
+
+    [SerializeField]
+    private Sprite emptyChestSprite;
+
+    [SerializeField]
+    private BaseIndicator unblockedIndicator;
+
+    [SerializeField]
+    private int minGoldReceive;
+
+    [SerializeField]
+    private int maxGoldReceive;
 
     private IItem[] _items;
     private bool _isOpening = false;

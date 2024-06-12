@@ -1,12 +1,14 @@
-﻿namespace CongTDev.EventManagers
+﻿namespace Tqa.DungeonQuest.EventManagers
 {
     public class ObjectHolder<T>
     {
         public ObjectHolder() { }
-        public ObjectHolder(T obj) 
-        { 
+
+        public ObjectHolder(T obj)
+        {
             value = obj;
         }
+
         public T value;
     }
 }

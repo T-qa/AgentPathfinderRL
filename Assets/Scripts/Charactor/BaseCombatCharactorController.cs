@@ -1,13 +1,22 @@
-﻿using CongTDev.AbilitySystem;
+﻿using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 public abstract class BaseCombatCharactorController : MonoBehaviour
 {
-    [field: SerializeField] public BaseMovementInput MovementInput { get; private set; }
-    [field: SerializeField] public Movement Movement { get; private set; }
-    [field: SerializeField] public Fighter Combat { get; private set; }
-    [field: SerializeField] public AbilityCaster AbilityCaster { get; private set; }
-    [field: SerializeField] public CombatAnimator Animator { get; private set; }
+    [field: SerializeField]
+    public BaseMovementInput MovementInput { get; private set; }
+
+    [field: SerializeField]
+    public Movement Movement { get; private set; }
+
+    [field: SerializeField]
+    public Fighter Combat { get; private set; }
+
+    [field: SerializeField]
+    public AbilityCaster AbilityCaster { get; private set; }
+
+    [field: SerializeField]
+    public CombatAnimator Animator { get; private set; }
 
     protected virtual void Awake()
     {
@@ -21,18 +30,18 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        if(Movement != null)
+        if (Movement != null)
         {
             Movement.OnStartMoving -= StartMoving;
             Movement.OnStopMoving -= StopMoving;
             MovementInput.OnInputChange -= OnInputValueChange;
         }
-        if(Combat != null)
+        if (Combat != null)
         {
             Combat.OnTakeDamage -= OnTakeDamage;
             Combat.OnDead -= OnDead;
         }
-        if(AbilityCaster != null)
+        if (AbilityCaster != null)
         {
             AbilityCaster.OnCastingStart -= ShowCastingBar;
         }
@@ -52,6 +61,7 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
     {
         Movement.MoveDirect = vector;
     }
+
     protected virtual void OnTakeDamage(DamageBlock block)
     {
         Animator.TriggerHurtAnimation();

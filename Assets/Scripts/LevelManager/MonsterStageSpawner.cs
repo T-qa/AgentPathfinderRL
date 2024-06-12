@@ -1,16 +1,23 @@
-﻿using CongTDev.EventManagers;
-using CongTDev.ObjectPooling;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class MonsterStageSpawner : MonoBehaviour
 {
-    [SerializeField] private List<MonsterSpawnInfo> monsterLists;
-    [SerializeField] private Prefab spawningEffect;
-    [SerializeField] private float spawnRange;
-    [SerializeField] private float spawnDelay;
+    [SerializeField]
+    private List<MonsterSpawnInfo> monsterLists;
+
+    [SerializeField]
+    private Prefab spawningEffect;
+
+    [SerializeField]
+    private float spawnRange;
+
+    [SerializeField]
+    private float spawnDelay;
 
     public int CurrentMonster { get; private set; } = 0;
 
@@ -32,9 +39,9 @@ public class MonsterStageSpawner : MonoBehaviour
     public void SpawnMonsters(MonsterSpawnInfo spawnInfo)
     {
         const int MAX_TRY_ALLOW = 100;
-        for (int count = 0, tried = 0; count < spawnInfo.count && tried < MAX_TRY_ALLOW;)
+        for (int count = 0, tried = 0; count < spawnInfo.count && tried < MAX_TRY_ALLOW; )
         {
-            if(SpawnInRandomPosition(spawnInfo))
+            if (SpawnInRandomPosition(spawnInfo))
             {
                 count++;
             }
@@ -47,15 +54,16 @@ public class MonsterStageSpawner : MonoBehaviour
 
     public bool SpawnInRandomPosition(MonsterSpawnInfo spawnInfo)
     {
-        var position = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * spawnRange;
-        if(!CanSpawnAtThisPoint(position))
+        var position =
+            (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * spawnRange;
+        if (!CanSpawnAtThisPoint(position))
             return false;
 
         StartCoroutine(SpawnMonster(spawnInfo, position));
         return true;
     }
 
-    public IEnumerator SpawnMonster(MonsterSpawnInfo spawnInfo , Vector2 spawnPosition)
+    public IEnumerator SpawnMonster(MonsterSpawnInfo spawnInfo, Vector2 spawnPosition)
     {
         CurrentMonster++;
         if (PoolManager.Get<PoolObject>(spawningEffect, out var effect))
@@ -65,14 +73,15 @@ public class MonsterStageSpawner : MonoBehaviour
             effect.ReturnToPool();
         }
 
-        if(PoolManager.Get<MonstersController>(spawnInfo.prefab, out var monster))
+        if (PoolManager.Get<MonstersController>(spawnInfo.prefab, out var monster))
         {
             monster.transform.position = spawnPosition;
             monster.Initialize(spawnInfo.statData, spawnInfo.level);
             monster.StageSupportDeathEvent += _ => CurrentMonster--;
-            if(spawnInfo.xp > 0)
+            if (spawnInfo.xp > 0)
             {
-                monster.StageSupportDeathEvent += _ => EventManager<int>.RaiseEvent("OnReceiveXp", spawnInfo.xp);
+                monster.StageSupportDeathEvent += _ =>
+                    EventManager<int>.RaiseEvent("OnReceiveXp", spawnInfo.xp);
             }
         }
         else
@@ -91,9 +100,8 @@ public class MonsterStageSpawner : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, spawnRange);
-    } 
+    }
 #endif
-
 }
 
 [Serializable]
@@ -105,4 +113,3 @@ public class MonsterSpawnInfo
     public int count;
     public int xp;
 }
-

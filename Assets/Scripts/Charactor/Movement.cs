@@ -20,18 +20,18 @@ public class Movement : MonoBehaviour
     public float MoveSpeed
     {
         get => _moveSpeed;
-        set 
-        { 
-            _moveSpeed = Mathf.Max(0, value); 
+        set
+        {
+            _moveSpeed = Mathf.Max(0, value);
             CheckForMovingEvent();
         }
     }
-    public Vector2 MoveDirect 
+    public Vector2 MoveDirect
     {
         get => _moveDirect;
         set
-        {   
-            if(value.x != 0)
+        {
+            if (value.x != 0)
             {
                 IsFacingRight = value.x > 0;
                 rotateTransform.rotation = IsFacingRight ? rightRotation : leftRotation;
@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public bool BlockMovement 
+    public bool BlockMovement
     {
         get => _blockElement > 0;
         set
@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
             {
                 _blockElement++;
             }
-            else if(_blockElement > 0)
+            else if (_blockElement > 0)
             {
                 _blockElement--;
             }
@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         if (IsMoving)
-        {     
+        {
             rigidbody2d.velocity = MoveDirect * MoveSpeed;
         }
         else
@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
     public void Block(float blockTime)
     {
         StartCoroutine(BlockMovementCoroutine(blockTime));
-    }    
+    }
 
     private void CheckForMovingEvent()
     {

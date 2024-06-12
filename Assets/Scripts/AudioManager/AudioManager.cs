@@ -1,11 +1,11 @@
-﻿using CongTDev.ObjectPooling;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     public static class AudioManager
     {
@@ -22,7 +22,8 @@ namespace CongTDev.AudioManagement
         private static readonly Prefab _audioSourcePrefab;
         public static float MasterVolume
         {
-            get => Mathf.Clamp(PlayerPrefs.GetFloat(MASTER_VOLUME, MAX_VALUE), MIN_VALUE, MAX_VALUE);
+            get =>
+                Mathf.Clamp(PlayerPrefs.GetFloat(MASTER_VOLUME, MAX_VALUE), MIN_VALUE, MAX_VALUE);
             set
             {
                 value = Mathf.Clamp(value, MIN_VALUE, MAX_VALUE);
@@ -66,15 +67,24 @@ namespace CongTDev.AudioManagement
         static AudioManager()
         {
             Mixer = Resources.Load<AudioMixer>("Audio/AudioMixer");
-            _audioAssets = Resources.LoadAll<AudioAsset>("Audio/AudioAssets")
-                                    .ToDictionary(audioAsset => audioAsset.name, audioAsset => audioAsset);
-            _audioSourcePrefab = Resources.Load<GameObject>("Audio/AudioSourceHelper").GetComponent<Prefab>();
+            _audioAssets = Resources
+                .LoadAll<AudioAsset>("Audio/AudioAssets")
+                .ToDictionary(audioAsset => audioAsset.name, audioAsset => audioAsset);
+            _audioSourcePrefab = Resources
+                .Load<GameObject>("Audio/AudioSourceHelper")
+                .GetComponent<Prefab>();
 
             var mixerGroups = Mixer.FindMatchingGroups("");
             _audioGroups = new()
             {
-                { AudioAsset.MixerGroup.Master, mixerGroups.First((group) => group.name == "Master") },
-                { AudioAsset.MixerGroup.Music, mixerGroups.First((group) => group.name == "Music") },
+                {
+                    AudioAsset.MixerGroup.Master,
+                    mixerGroups.First((group) => group.name == "Master")
+                },
+                {
+                    AudioAsset.MixerGroup.Music,
+                    mixerGroups.First((group) => group.name == "Music")
+                },
                 { AudioAsset.MixerGroup.SFX, mixerGroups.First((group) => group.name == "SFX") },
                 { AudioAsset.MixerGroup.UI, mixerGroups.First((group) => group.name == "UI") },
             };
@@ -111,7 +121,7 @@ namespace CongTDev.AudioManagement
             {
                 Debug.LogError("Fail to create audio source. Please check your resource floder");
                 return NullSource.Instance;
-            }  
+            }
 
             return audioSource.Play(audioAsset.AudioClip, _audioGroups[audioAsset.Mixer]);
         }

@@ -3,9 +3,14 @@ using UnityEngine.Events;
 
 public class StageTrigger : MonoBehaviour
 {
-    [SerializeField] private LevelManager levelManager;
-    [SerializeField] private PolygonCollider2D boundary;
-    [SerializeField] private MonsterStageSpawner[] stageSpawners;
+    [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
+    private PolygonCollider2D boundary;
+
+    [SerializeField]
+    private MonsterStageSpawner[] stageSpawners;
 
     public UnityEvent OnStageTrigger;
     public UnityEvent OnStageEnded;
@@ -45,8 +50,5 @@ public class StageTrigger : MonoBehaviour
         _isActive = false;
         levelManager.SetToDefaultLevelBound();
         OnStageEnded.Invoke();
-
     }
-    
 }
-

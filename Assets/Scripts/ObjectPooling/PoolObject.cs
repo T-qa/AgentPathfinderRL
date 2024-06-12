@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CongTDev.ObjectPooling
+namespace Tqa.DungeonQuest.ObjectPooling
 {
     public class PoolObject : MonoBehaviour, IPoolObject
     {
@@ -14,7 +14,7 @@ namespace CongTDev.ObjectPooling
 
         public void ReturnToPool()
         {
-            if(_returnAction != null)
+            if (_returnAction != null)
             {
                 _returnAction.Invoke(this);
                 _returnAction = null;

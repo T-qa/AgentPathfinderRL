@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Damage", menuName = "Effects/Instant/Damage")]
     public class DamageEffect : BaseEffectAndFactory
     {
-        [SerializeField] protected DamageType damageType;
-        [SerializeField] protected StatBasedValue damageBased;
+        [SerializeField]
+        protected DamageType damageType;
+
+        [SerializeField]
+        protected StatBasedValue damageBased;
 
         public override void Instanciate(Fighter source, Fighter target)
         {

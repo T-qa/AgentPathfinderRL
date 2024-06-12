@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CongTDev.EventManagers
+namespace Tqa.DungeonQuest.EventManagers
 {
     public static class EventManager
     {

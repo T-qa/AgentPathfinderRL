@@ -1,13 +1,14 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AudioManagement;
-using CongTDev.EventManagers;
-using TMPro;
+﻿using TMPro;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ShopSlot : ItemSlot<IItem>
 {
-    [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField]
+    private TextMeshProUGUI priceText;
 
     private int _price;
 
@@ -23,8 +24,10 @@ public class ShopSlot : ItemSlot<IItem>
     }
 
     public override void OnBeginDrag(PointerEventData eventData) { }
+
     public override void OnEndDrag(PointerEventData eventData) { }
-    public override void OnDrop(PointerEventData eventData) 
+
+    public override void OnDrop(PointerEventData eventData)
     {
         if (!IsSlotEmpty)
             return;
@@ -34,13 +37,14 @@ public class ShopSlot : ItemSlot<IItem>
         if (holder.value is null || holder.value.IsSlotEmpty)
             return;
 
-        if(holder.value.BaseItem is IAbility)
+        if (holder.value.BaseItem is IAbility)
         {
             ConfirmPanel.Ask("You can't sell learned ability");
             return;
         }
 
-        ConfirmPanel.Ask("Do you want to sold this item with 1G?", 
+        ConfirmPanel.Ask(
+            "Do you want to sold this item with 1G?",
             () =>
             {
                 if (IItemSlot.Swap(this, holder.value))
@@ -49,7 +53,8 @@ public class ShopSlot : ItemSlot<IItem>
                     AudioManager.Play("BuySell");
                     SetPrice(50);
                 }
-            });
+            }
+        );
     }
 
     public override bool IsMeetSlotRequiment(IItem item)
@@ -78,17 +83,18 @@ public class ShopSlot : ItemSlot<IItem>
     protected override void OnSlotRightCliked()
     {
         base.OnSlotRightCliked();
-        if(GameManager.PlayerGold < _price)
+        if (GameManager.PlayerGold < _price)
         {
             ConfirmPanel.Ask("Don't have enough gold!");
         }
         else
         {
-            ConfirmPanel.Ask($"Do you want to buy this item with price {_price}G",
+            ConfirmPanel.Ask(
+                $"Do you want to buy this item with price {_price}G",
                 () =>
                 {
                     EventManager<IItemSlot>.RaiseEvent(Inventory.TRY_ADD_ITEM_TO_INVENTROY, this);
-                    if(!IsSlotEmpty)
+                    if (!IsSlotEmpty)
                     {
                         ConfirmPanel.Ask("Don't have enough space in your inventory!");
                     }
@@ -97,12 +103,14 @@ public class ShopSlot : ItemSlot<IItem>
                         GameManager.PlayerGold -= _price;
                         AudioManager.Play("BuySell");
                     }
-                });
+                }
+            );
         }
     }
+
     private void UpdatePriceUI()
     {
-        if(GameManager.PlayerGold < _price)
+        if (GameManager.PlayerGold < _price)
         {
             priceText.text = $"{_price} G".RichText(Color.red);
         }

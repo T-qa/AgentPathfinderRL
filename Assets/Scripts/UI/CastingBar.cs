@@ -1,12 +1,15 @@
-using CongTDev.AbilitySystem;
-using CongTDev.ObjectPooling;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CastingBar : PoolObject
 {
-    [SerializeField] private Image fillImage;
-    [SerializeField] private Vector2 offset;
+    [SerializeField]
+    private Image fillImage;
+
+    [SerializeField]
+    private Vector2 offset;
 
     private AbilityCaster _abilityCaster;
     private Vector3 _finalOffSet;
@@ -19,7 +22,7 @@ public class CastingBar : PoolObject
             _finalOffSet = offset + new Vector2(0, -abilityCaster.Owner.HitBox.bounds.extents.y);
             fillImage.fillAmount = 0;
             _abilityCaster.OnCastingProgress += ProgressCasting;
-            _abilityCaster.OnCastingEnd += EndCasting; 
+            _abilityCaster.OnCastingEnd += EndCasting;
         }
         else
         {
@@ -29,7 +32,7 @@ public class CastingBar : PoolObject
 
     private void LateUpdate()
     {
-        if(_abilityCaster != null) 
+        if (_abilityCaster != null)
         {
             transform.position = _abilityCaster.Owner.HitBox.bounds.center + _finalOffSet;
         }
@@ -42,7 +45,7 @@ public class CastingBar : PoolObject
 
     private void EndCasting()
     {
-        if(_abilityCaster != null)
+        if (_abilityCaster != null)
         {
             _abilityCaster.OnCastingProgress -= ProgressCasting;
             _abilityCaster.OnCastingEnd -= EndCasting;

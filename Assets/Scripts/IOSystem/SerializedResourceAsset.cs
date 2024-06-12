@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CongTDev.IOSystem
+namespace Tqa.DungeonQuest.IOSystem
 {
     [Serializable]
     public class SerializedResourceAsset : SerializedObject

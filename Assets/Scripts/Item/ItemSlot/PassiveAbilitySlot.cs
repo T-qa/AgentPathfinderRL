@@ -1,12 +1,13 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.EventManagers;
-using System;
+﻿using System;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PassiveAbilitySlot : ItemSlot<IPassiveAbility>
 {
-    [SerializeField] private Image background;
+    [SerializeField]
+    private Image background;
 
     public override bool IsMeetSlotRequiment(IItem item)
     {
@@ -17,7 +18,7 @@ public class PassiveAbilitySlot : ItemSlot<IPassiveAbility>
     {
         base.OnItemGetIn(passiveAbility);
         PlayerController.Instance.AbilityCaster.AddPassiveAbility(passiveAbility);
-        if(background != null)
+        if (background != null)
         {
             background.enabled = false;
         }
@@ -38,5 +39,3 @@ public class PassiveAbilitySlot : ItemSlot<IPassiveAbility>
         EventManager<IItemSlot>.RaiseEvent(Inventory.TRY_ADD_ITEM_TO_INVENTROY, this);
     }
 }
-
-

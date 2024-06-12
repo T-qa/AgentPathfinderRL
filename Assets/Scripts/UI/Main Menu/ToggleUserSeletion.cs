@@ -1,15 +1,17 @@
-using CongTDev.EventManagers;
 using TMPro;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CongTDev.MainMenu
+namespace Tqa.DungeonQuest.MainMenu
 {
     public class ToggleUserSeletion : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI userText;
+        [SerializeField]
+        private TextMeshProUGUI userText;
 
-        [SerializeField] private Toggle toggle;
+        [SerializeField]
+        private Toggle toggle;
 
         private void OnEnable()
         {

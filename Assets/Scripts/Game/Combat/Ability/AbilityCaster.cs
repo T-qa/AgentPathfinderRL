@@ -1,9 +1,9 @@
-﻿using DG.Tweening;
-using System;
-using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public class AbilityCaster : MonoBehaviour
     {
@@ -15,7 +15,8 @@ namespace CongTDev.AbilitySystem
         private Tweener _tweener;
         private Vector2 _lookDirection;
 
-        [field: SerializeField] public Fighter Owner { get; private set; }
+        [field: SerializeField]
+        public Fighter Owner { get; private set; }
         public bool IsCasting { get; private set; }
         public Fighter CurrentTarget { get; set; }
 
@@ -33,9 +34,10 @@ namespace CongTDev.AbilitySystem
             OnCastingStart?.Invoke(ability);
             IsCasting = true;
 
-            _tweener = DOVirtual.Float(0, 1, ability.CastDelay, (progress) => OnCastingProgress?.Invoke(progress))
-               .SetEase(Ease.Linear)
-               .OnComplete(() => OnCastingCompleting(skillAction));
+            _tweener = DOVirtual
+                .Float(0, 1, ability.CastDelay, (progress) => OnCastingProgress?.Invoke(progress))
+                .SetEase(Ease.Linear)
+                .OnComplete(() => OnCastingCompleting(skillAction));
         }
 
         public void CollapseCasting()

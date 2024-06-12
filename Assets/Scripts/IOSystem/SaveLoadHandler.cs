@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace CongTDev.IOSystem
+namespace Tqa.DungeonQuest.IOSystem
 {
     public static class SaveLoadHandler
     {
@@ -31,7 +31,9 @@ namespace CongTDev.IOSystem
             string json = JsonUtility.ToJson(data);
             File.WriteAllText(path, json);
         }
-        public static T LoadFromFile<T>(string fileName) where T : class
+
+        public static T LoadFromFile<T>(string fileName)
+            where T : class
         {
             string path = FileNameData.GetFullPath(fileName);
             if (!File.Exists(path))
@@ -47,8 +49,6 @@ namespace CongTDev.IOSystem
             {
                 return null;
             }
-            
         }
     }
-
 }

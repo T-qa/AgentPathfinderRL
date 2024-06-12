@@ -1,18 +1,20 @@
-﻿using CongTDev.ObjectPooling;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Orientation rune", menuName = "Rune/Orientation")]
     public class OrientationRune : ActiveRune
     {
         private static readonly string[] _types = new string[] { "Rune", "Orientation" };
 
-        [SerializeField] private List<BaseEffectFactory> effectsApplyToTarget;
+        [SerializeField]
+        private List<BaseEffectFactory> effectsApplyToTarget;
 
-        [field: SerializeField] public Prefab SpellReleaseWhenUse { get; private set; }
+        [field: SerializeField]
+        public Prefab SpellReleaseWhenUse { get; private set; }
 
         public IReadOnlyCollection<BaseEffectFactory> EffectsApplyToTarget => effectsApplyToTarget;
 

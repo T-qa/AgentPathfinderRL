@@ -1,11 +1,14 @@
-using CongTDev.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BossUI : MonoBehaviour
 {
-    [SerializeField] private Image healthFill;
-    [SerializeField] private AbilityCaster abilityCaster;
+    [SerializeField]
+    private Image healthFill;
+
+    [SerializeField]
+    private AbilityCaster abilityCaster;
 
     private void Awake()
     {

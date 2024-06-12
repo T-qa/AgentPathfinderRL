@@ -2,7 +2,8 @@
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private PolygonCollider2D defaulfBoundary;
+    [SerializeField]
+    private PolygonCollider2D defaulfBoundary;
 
     private void Start()
     {
@@ -21,12 +22,14 @@ public class LevelManager : MonoBehaviour
 
     public void SetBoundAfterMoveOffset(Vector3 offset, float moveTime, PolygonCollider2D boundary)
     {
-        CameraManager.Instance.MoveOffet(offset, moveTime,
-                () =>
-                {
-                    SetConfinerCollider(boundary);
-                    CameraManager.Instance.MoveOffet(Vector3.zero, 1f);
-                });
+        CameraManager.Instance.MoveOffet(
+            offset,
+            moveTime,
+            () =>
+            {
+                SetConfinerCollider(boundary);
+                CameraManager.Instance.MoveOffet(Vector3.zero, 1f);
+            }
+        );
     }
 }
-

@@ -1,18 +1,28 @@
-﻿using CongTDev.AbilitySystem;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 public class MeleeAICombatBehaviour : BaseAICombatBehaviour
 {
     [Header("Meele AI fields")]
-    [SerializeField] protected ActiveRune firstRune;
-    [SerializeField] protected float movingRange;
-    [SerializeField] protected float combatExitTime;
+    [SerializeField]
+    protected ActiveRune firstRune;
+
+    [SerializeField]
+    protected float movingRange;
+
+    [SerializeField]
+    protected float combatExitTime;
 
     [Header("Secondary Ability")]
-    [SerializeField] private ActiveRune secondaryRune;
-    [SerializeField] private float healThreshHold;
-    [SerializeField] private float abilityCheckInterval;
+    [SerializeField]
+    private ActiveRune secondaryRune;
+
+    [SerializeField]
+    private float healThreshHold;
+
+    [SerializeField]
+    private float abilityCheckInterval;
 
     private IActiveAbility _ability;
     private IActiveAbility _secondaryAbility;
@@ -33,8 +43,14 @@ public class MeleeAICombatBehaviour : BaseAICombatBehaviour
         while (IsAlive())
         {
             var distanceToPlayer = Vector2.Distance(transform.position, monsterAI.PlayerPosition);
-            var distanceToStartPosition = Vector2.Distance(transform.position, monsterAI.StartPosition);
-            if (Time.time > exitTime && (distanceToPlayer > vision || distanceToStartPosition > maxMoveRange))
+            var distanceToStartPosition = Vector2.Distance(
+                transform.position,
+                monsterAI.StartPosition
+            );
+            if (
+                Time.time > exitTime
+                && (distanceToPlayer > vision || distanceToStartPosition > maxMoveRange)
+            )
             {
                 StopCoroutine(secondaryAbilityRoutine);
                 yield break;
@@ -61,7 +77,7 @@ public class MeleeAICombatBehaviour : BaseAICombatBehaviour
     {
         while (IsAlive())
         {
-            if(abilityCaster.Owner.Health.Ratio < healThreshHold)
+            if (abilityCaster.Owner.Health.Ratio < healThreshHold)
             {
                 switch (_secondaryAbility.TryUse())
                 {

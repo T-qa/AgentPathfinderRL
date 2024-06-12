@@ -1,21 +1,35 @@
-﻿using CongTDev.AbilitySystem;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
 public class RangeAICombatBehaviour : BaseAICombatBehaviour
 {
     [Header("Range control fields")]
-    [SerializeField] protected ActiveRune activeRuneSO;
-    [SerializeField] protected float movingRange;
-    [SerializeField] protected float movingAngle;
-    [SerializeField] protected float aimTime;
-    [SerializeField] protected float combatExitTime;
+    [SerializeField]
+    protected ActiveRune activeRuneSO;
+
+    [SerializeField]
+    protected float movingRange;
+
+    [SerializeField]
+    protected float movingAngle;
+
+    [SerializeField]
+    protected float aimTime;
+
+    [SerializeField]
+    protected float combatExitTime;
 
     [Header("Secondary ability")]
-    [SerializeField] private OrientationRune damageZoneRune;
-    [SerializeField] private float secondAbilityStartUseTime;
+    [SerializeField]
+    private OrientationRune damageZoneRune;
+
+    [SerializeField]
+    private float secondAbilityStartUseTime;
+
     [Min(0.1f)]
-    [SerializeField] protected float secondAbilityCheckInterval;
+    [SerializeField]
+    protected float secondAbilityCheckInterval;
 
     private IActiveAbility _ability;
     private IActiveAbility _damageZoneAbility;
@@ -36,8 +50,14 @@ public class RangeAICombatBehaviour : BaseAICombatBehaviour
         while (IsAlive())
         {
             var distanceToPlayer = Vector2.Distance(transform.position, monsterAI.PlayerPosition);
-            var distanceToStartPosition = Vector2.Distance(transform.position, monsterAI.StartPosition);
-            if (Time.time > exitTime && (distanceToPlayer > vision || distanceToStartPosition > maxMoveRange))
+            var distanceToStartPosition = Vector2.Distance(
+                transform.position,
+                monsterAI.StartPosition
+            );
+            if (
+                Time.time > exitTime
+                && (distanceToPlayer > vision || distanceToStartPosition > maxMoveRange)
+            )
             {
                 if (secondAbilityRoutine != null)
                 {
@@ -47,7 +67,6 @@ public class RangeAICombatBehaviour : BaseAICombatBehaviour
             }
             if (distanceToPlayer < attackRange)
             {
-
                 switch (_ability.TryUse())
                 {
                     case Respond.Success:

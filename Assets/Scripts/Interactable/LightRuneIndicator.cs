@@ -1,10 +1,11 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class LightRuneIndicator : BaseIndicator
 {
-    [SerializeField] private SpriteRenderer[] runes;
+    [SerializeField]
+    private SpriteRenderer[] runes;
 
     private Color currentColor = new(0, 0.8f, 0.9f, 0f);
 
@@ -34,7 +35,7 @@ public class LightRuneIndicator : BaseIndicator
 
     private IEnumerator DoFadeCoroutine(float value)
     {
-        while(Mathf.Abs(currentColor.a - value) >= Mathf.Epsilon)
+        while (Mathf.Abs(currentColor.a - value) >= Mathf.Epsilon)
         {
             currentColor.a = Mathf.MoveTowards(currentColor.a, value, Time.fixedDeltaTime);
             foreach (var rune in runes)

@@ -1,26 +1,44 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.AudioManagement;
-using CongTDev.ObjectPooling;
-using System.Collections;
+﻿using System.Collections;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.TheBoss
+namespace Tqa.DungeonQuest.TheBoss
 {
     public class BossDamageZoneSpell : PoolObject, ISpell
     {
-        [SerializeField] private Prefab ropePrefab;
-        [SerializeField] private Prefab minionSpawnSpellPrefab;
-        [SerializeField] private GameObject explosion;
-        [SerializeField] private GameObject indicator;
-        [SerializeField] private Rigidbody2D rb2d;
+        [SerializeField]
+        private Prefab ropePrefab;
 
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float changeDirectionInterval;
-        [SerializeField] private float activeDelay;
-        [SerializeField] private float damageRange;
-        [SerializeField] private float blockTime;
+        [SerializeField]
+        private Prefab minionSpawnSpellPrefab;
+
+        [SerializeField]
+        private GameObject explosion;
+
+        [SerializeField]
+        private GameObject indicator;
+
+        [SerializeField]
+        private Rigidbody2D rb2d;
+
+        [SerializeField]
+        private float moveSpeed;
+
+        [SerializeField]
+        private float changeDirectionInterval;
+
+        [SerializeField]
+        private float activeDelay;
+
+        [SerializeField]
+        private float damageRange;
+
+        [SerializeField]
+        private float blockTime;
 
         public void KickOff(OrientationAbility ability, Vector2 position)
         {
@@ -49,10 +67,19 @@ namespace CongTDev.TheBoss
             AudioManager.Play("IceCircleExplosion");
             var effectList = ListPool<IPoolObject>.Get();
             Fighter hitTarget = null;
-            var hits = Physics2D.OverlapCircleAll(transform.position, damageRange, LayerMaskHelper.FigherMask);
+            var hits = Physics2D.OverlapCircleAll(
+                transform.position,
+                damageRange,
+                LayerMaskHelper.FigherMask
+            );
             foreach (var hit in hits)
             {
-                if (!(hit.TryGetComponent<Fighter>(out var fighter) && ability.IsRightTarget(fighter)))
+                if (
+                    !(
+                        hit.TryGetComponent<Fighter>(out var fighter)
+                        && ability.IsRightTarget(fighter)
+                    )
+                )
                     continue;
 
                 ability.HitThisFighter(fighter);
@@ -75,7 +102,6 @@ namespace CongTDev.TheBoss
                 effect.ReturnToPool();
             }
             ListPool<IPoolObject>.Release(effectList);
-
         }
 
 #if UNITY_EDITOR
@@ -83,7 +109,7 @@ namespace CongTDev.TheBoss
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, damageRange);
-        } 
+        }
 #endif
     }
 }

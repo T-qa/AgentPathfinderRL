@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     [CreateAssetMenu(menuName = "AudioAsset")]
     public class AudioAsset : ScriptableObject
@@ -13,7 +13,10 @@ namespace CongTDev.AudioManagement
             UI
         }
 
-        [field: SerializeField] public AudioClip AudioClip { get; private set; }
-        [field: SerializeField] public MixerGroup Mixer { get; private set; }
+        [field: SerializeField]
+        public AudioClip AudioClip { get; private set; }
+
+        [field: SerializeField]
+        public MixerGroup Mixer { get; private set; }
     }
 }

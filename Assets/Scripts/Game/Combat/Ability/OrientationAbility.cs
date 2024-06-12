@@ -1,10 +1,10 @@
-﻿using CongTDev.AbilitySystem.Spell;
-using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
-using System;
+﻿using System;
 using System.Text;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public class OrientationAbility : ActiveAbility<OrientationRune>
     {
@@ -90,12 +90,13 @@ namespace CongTDev.AbilitySystem
             return new SerializedOrientationAbility(this);
         }
 
-
         [Serializable]
         public class SerializedOrientationAbility : SerializedObject
         {
             public string runeJson;
+
             public SerializedOrientationAbility() { }
+
             public SerializedOrientationAbility(OrientationAbility ability)
             {
                 runeJson = ability.Rune.ToWrappedJson();

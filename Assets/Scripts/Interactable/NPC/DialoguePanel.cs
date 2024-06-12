@@ -30,14 +30,19 @@ public class DialoguePanel : MonoBehaviour, IPointerClickHandler
         {
             _showDialogueAction.Invoke(dialogueObject);
         }
-
     }
 
-    [SerializeField] private GameObject parentCanvas;
-    [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private OptionBox optionBox;
+    [SerializeField]
+    private GameObject parentCanvas;
 
-    [SerializeField] private float writeSpeed;
+    [SerializeField]
+    private TextMeshProUGUI dialogueText;
+
+    [SerializeField]
+    private OptionBox optionBox;
+
+    [SerializeField]
+    private float writeSpeed;
 
     private bool _isWriting = false;
     private Coroutine _writeRoutine;
@@ -85,7 +90,12 @@ public class DialoguePanel : MonoBehaviour, IPointerClickHandler
         }
         else if (dialogueObject.options.Count > 1)
         {
-            optionBox.ShowOptions(dialogueObject.options.ToDictionary(op => op.message, op => op.choosenEvent.UnityEventToAction()));
+            optionBox.ShowOptions(
+                dialogueObject.options.ToDictionary(
+                    op => op.message,
+                    op => op.choosenEvent.UnityEventToAction()
+                )
+            );
             yield return new WaitWhile(() => optionBox.IsShowing);
         }
         CompleteDialogue();

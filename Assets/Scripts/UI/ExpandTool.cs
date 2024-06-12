@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class ExpandTool : MonoBehaviour
 {
-    [SerializeField] private RectTransform rectTransform;
+    [SerializeField]
+    private RectTransform rectTransform;
 
     [Space]
-    [SerializeField] private Vector2 normalStateArea;
+    [SerializeField]
+    private Vector2 normalStateArea;
 
     [Space]
-    [SerializeField] private Vector2 expandStateArea;
+    [SerializeField]
+    private Vector2 expandStateArea;
 
-    [SerializeField] private bool isDefaultExpand;
+    [SerializeField]
+    private bool isDefaultExpand;
 
     private bool _isNormal = true;
     Tweener _tweener;
@@ -57,5 +61,4 @@ public class ExpandTool : MonoBehaviour
             ToNormalState();
         }
     }
-
 }

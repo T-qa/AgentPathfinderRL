@@ -1,22 +1,32 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
-using System;
+﻿using System;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SkillSet : MonoBehaviour, ISerializable
 {
-    [SerializeField] private ActiveAbilitySlot[] activeAbilitySlots;
-    [SerializeField] private ConsumableSlot consumableSlotX;
-    [SerializeField] private ConsumableSlot consumableSlotC;
-    [SerializeField] private ActiveAbilitySlot basicAbilitySlot;
-    [SerializeField] private ActiveRune basicAbilityRune;
+    [SerializeField]
+    private ActiveAbilitySlot[] activeAbilitySlots;
+
+    [SerializeField]
+    private ConsumableSlot consumableSlotX;
+
+    [SerializeField]
+    private ConsumableSlot consumableSlotC;
+
+    [SerializeField]
+    private ActiveAbilitySlot basicAbilitySlot;
+
+    [SerializeField]
+    private ActiveRune basicAbilityRune;
 
     private void OnEnable()
     {
         SubscribeEvents();
     }
+
     private void OnDisable()
     {
         UnsubscribeEvents();
@@ -26,8 +36,6 @@ public class SkillSet : MonoBehaviour, ISerializable
     {
         basicAbilitySlot.PushItem(basicAbilityRune.CreateItem());
     }
-
-    
 
     private void SubscribeEvents()
     {
@@ -43,7 +51,6 @@ public class SkillSet : MonoBehaviour, ISerializable
         abilityInput.Consum2.performed += UseConsumC;
     }
 
-
     private void UnsubscribeEvents()
     {
         EventManager<IItemSlot>.RemoveListener("TryEquipActiveAbility", AcquipAbility);
@@ -57,6 +64,7 @@ public class SkillSet : MonoBehaviour, ISerializable
         abilityInput.Consum1.performed -= UseConsumX;
         abilityInput.Consum2.performed -= UseConsumC;
     }
+
     private void UseAbility0(InputAction.CallbackContext context)
     {
         basicAbilitySlot.TryUseSlotAbility();
@@ -64,21 +72,24 @@ public class SkillSet : MonoBehaviour, ISerializable
 
     private void UseAbility1(InputAction.CallbackContext context)
     {
-
         activeAbilitySlots[0].TryUseSlotAbility();
     }
+
     private void UseAbility2(InputAction.CallbackContext context)
     {
         activeAbilitySlots[1].TryUseSlotAbility();
     }
+
     private void UseAbility3(InputAction.CallbackContext context)
     {
         activeAbilitySlots[2].TryUseSlotAbility();
     }
+
     private void UseAbility4(InputAction.CallbackContext context)
     {
         activeAbilitySlots[3].TryUseSlotAbility();
     }
+
     private void UseAbility5(InputAction.CallbackContext context)
     {
         activeAbilitySlots[4].TryUseSlotAbility();
@@ -91,7 +102,7 @@ public class SkillSet : MonoBehaviour, ISerializable
 
     private void UseConsumC(InputAction.CallbackContext context)
     {
-       consumableSlotC.UseItem();
+        consumableSlotC.UseItem();
     }
 
     private void AcquipAbility(IItemSlot inventorySlot)
@@ -149,7 +160,10 @@ public class SkillSet : MonoBehaviour, ISerializable
 
         public void Load(SkillSet skillSet)
         {
-            int activeCount = Mathf.Min(skillSet.activeAbilitySlots.Length, activeAbilityJsons.Length);
+            int activeCount = Mathf.Min(
+                skillSet.activeAbilitySlots.Length,
+                activeAbilityJsons.Length
+            );
 
             for (int i = 0; i < activeCount; i++)
             {
@@ -157,11 +171,16 @@ public class SkillSet : MonoBehaviour, ISerializable
                 skillSet.activeAbilitySlots[i].PushItem(activeAbility);
             }
 
-            skillSet.consumableSlotX.PushItem((IItem)JsonHelper.WrappedJsonToObject(consumSlotXJson));
-            skillSet.consumableSlotC.PushItem((IItem)JsonHelper.WrappedJsonToObject(consumSlotCJson));
+            skillSet.consumableSlotX.PushItem(
+                (IItem)JsonHelper.WrappedJsonToObject(consumSlotXJson)
+            );
+            skillSet.consumableSlotC.PushItem(
+                (IItem)JsonHelper.WrappedJsonToObject(consumSlotCJson)
+            );
         }
 
         public override SerializedType GetSerializedType() => SerializedType.SkillSet;
+
         public SerializedObject Serialize()
         {
             return this;
@@ -173,5 +192,4 @@ public class SkillSet : MonoBehaviour, ISerializable
         }
     }
     #endregion
-
 }

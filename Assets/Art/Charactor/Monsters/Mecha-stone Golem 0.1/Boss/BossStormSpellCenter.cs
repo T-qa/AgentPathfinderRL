@@ -1,14 +1,21 @@
-using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.ObjectPooling;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class BossStormSpellCenter : PoolObject, ISpell
 {
-    [SerializeField] private Prefab stormSpellPrefab;
-    [SerializeField] private float minRange;
-    [SerializeField] private float maxRange;
-    [SerializeField] private int count;
+    [SerializeField]
+    private Prefab stormSpellPrefab;
+
+    [SerializeField]
+    private float minRange;
+
+    [SerializeField]
+    private float maxRange;
+
+    [SerializeField]
+    private int count;
 
     public void KickOff(OrientationAbility ability, Vector2 _)
     {

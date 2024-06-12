@@ -1,11 +1,12 @@
-﻿using CongTDev.IOSystem;
+﻿using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public abstract class BaseEffectFactory : ScriptableObject, ISerializable
     {
-        [field: SerializeField] public EffectInfo EffectInfo { get; private set; } 
+        [field: SerializeField]
+        public EffectInfo EffectInfo { get; private set; }
 
         public abstract IEffect Build();
 

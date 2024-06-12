@@ -2,13 +2,18 @@
 using TMPro;
 using UnityEngine;
 
-namespace CongTDev.Communicate
+namespace Tqa.DungeonQuest.Communicate
 {
     public class MailBoxDislayer : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI titleText;
-        [SerializeField] private TextMeshProUGUI bodyText;
-        [SerializeField] private RewardSlot[] rewardSlots;
+        [SerializeField]
+        private TextMeshProUGUI titleText;
+
+        [SerializeField]
+        private TextMeshProUGUI bodyText;
+
+        [SerializeField]
+        private RewardSlot[] rewardSlots;
 
         private Mail _displayingMail;
 
@@ -16,7 +21,10 @@ namespace CongTDev.Communicate
         {
             if (rewardSlots.Length != Mail.ATTACHED_SLOT_LIMIT)
             {
-                throw new ArgumentException("Reward slot's number not equals limit attached slot", nameof(MailBoxDislayer));
+                throw new ArgumentException(
+                    "Reward slot's number not equals limit attached slot",
+                    nameof(MailBoxDislayer)
+                );
             }
             for (int i = 0; i < Mail.ATTACHED_SLOT_LIMIT; i++)
             {

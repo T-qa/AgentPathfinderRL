@@ -1,4 +1,4 @@
-﻿namespace CongTDev.AbilitySystem
+﻿namespace Tqa.DungeonQuest.AbilitySystem
 {
     public interface IEffect
     {

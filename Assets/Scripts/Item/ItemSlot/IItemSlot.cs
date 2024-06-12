@@ -14,7 +14,10 @@
 
     static bool Swap(IItemSlot sourceSlot, IItemSlot destSlot)
     {
-        if (!sourceSlot.IsMeetSlotRequiment(destSlot.BaseItem) || !destSlot.IsMeetSlotRequiment(sourceSlot.BaseItem))
+        if (
+            !sourceSlot.IsMeetSlotRequiment(destSlot.BaseItem)
+            || !destSlot.IsMeetSlotRequiment(sourceSlot.BaseItem)
+        )
             return false;
 
         var item1 = sourceSlot.PushItem(null);

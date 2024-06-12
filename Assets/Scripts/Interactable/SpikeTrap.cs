@@ -4,14 +4,29 @@ using UnityEngine.Pool;
 
 public class SpikeTrap : MonoBehaviour
 {
-    [SerializeField] private Collider2D trapCollider;
-    [SerializeField] private Sprite spikeDownSprite;
-    [SerializeField] private Sprite spikeUpSprite;
-    [SerializeField] private SpriteRenderer render;
-    [SerializeField] private float damageDeal;
-    [SerializeField] private float upTime;
-    [SerializeField] private float downTime;
-    [SerializeField] private float startDelay;
+    [SerializeField]
+    private Collider2D trapCollider;
+
+    [SerializeField]
+    private Sprite spikeDownSprite;
+
+    [SerializeField]
+    private Sprite spikeUpSprite;
+
+    [SerializeField]
+    private SpriteRenderer render;
+
+    [SerializeField]
+    private float damageDeal;
+
+    [SerializeField]
+    private float upTime;
+
+    [SerializeField]
+    private float downTime;
+
+    [SerializeField]
+    private float startDelay;
 
     private void OnEnable()
     {
@@ -21,7 +36,10 @@ public class SpikeTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<Fighter>(out var fighter) && fighter.team == Fighter.Team.Hero)
+        if (
+            collision.TryGetComponent<Fighter>(out var fighter)
+            && fighter.team == Fighter.Team.Hero
+        )
         {
             var damageBlock = GenericPool<DamageBlock>.Get();
             damageBlock.Init(damageDeal);
@@ -33,7 +51,7 @@ public class SpikeTrap : MonoBehaviour
     private IEnumerator SpikeUpCoroutine()
     {
         yield return startDelay.Wait();
-        while(true)
+        while (true)
         {
             SpikeUp();
             yield return upTime.Wait();

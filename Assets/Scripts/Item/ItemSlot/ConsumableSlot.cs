@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class ConsumableSlot : ItemSlot<ConsumableItem>
 {
-    [SerializeField] private TextMeshProUGUI amountText;
+    [SerializeField]
+    private TextMeshProUGUI amountText;
 
     public override bool IsMeetSlotRequiment(IItem item)
     {

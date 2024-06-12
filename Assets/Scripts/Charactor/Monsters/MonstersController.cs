@@ -1,5 +1,5 @@
-using CongTDev.ObjectPooling;
 using System;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class MonstersController : BaseCombatCharactorController, IPoolObject
@@ -7,14 +7,15 @@ public class MonstersController : BaseCombatCharactorController, IPoolObject
     public event Action OnDoneSetup;
     public event Action<Fighter> StageSupportDeathEvent;
 
-    [field: SerializeField] public string MonsterName { get; private set; }
+    [field: SerializeField]
+    public string MonsterName { get; private set; }
     public int Level { get; private set; }
 
     private FollowMonsterInfo _monsterInfo;
 
     private void OnDisable()
     {
-        if(_monsterInfo != null)
+        if (_monsterInfo != null)
         {
             _monsterInfo.ReturnToPool();
         }
@@ -39,7 +40,7 @@ public class MonstersController : BaseCombatCharactorController, IPoolObject
     {
         Level = level;
         var statModifiers = statData.growStat.GetGrowingStat(level);
-        foreach( var modifier in statModifiers )
+        foreach (var modifier in statModifiers)
         {
             Combat.Stats.ApplyModifier(modifier.Key, modifier.Value);
         }
@@ -71,6 +72,6 @@ public class MonstersController : BaseCombatCharactorController, IPoolObject
         {
             Destroy(gameObject);
         }
-    } 
+    }
     #endregion
 }

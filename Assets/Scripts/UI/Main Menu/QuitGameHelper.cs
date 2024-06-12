@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CongTDev.MainMenu
+namespace Tqa.DungeonQuest.MainMenu
 {
     public class QuitGameHelper : MonoBehaviour
     {

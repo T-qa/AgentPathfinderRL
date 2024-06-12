@@ -1,13 +1,15 @@
-﻿using CongTDev.EventManagers;
+﻿using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class ButtonEventHandler : MonoBehaviour
 {
-    [SerializeField] private string eventName;
+    [SerializeField]
+    private string eventName;
 
-    [SerializeField] private Button button;
+    [SerializeField]
+    private Button button;
 
     private void Reset()
     {
@@ -21,7 +23,6 @@ public class ButtonEventHandler : MonoBehaviour
 
     private void RaiseEvent()
     {
-
         EventManager.RaiseEvent(eventName);
     }
 

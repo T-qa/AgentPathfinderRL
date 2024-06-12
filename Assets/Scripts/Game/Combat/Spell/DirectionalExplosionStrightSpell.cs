@@ -1,7 +1,7 @@
-﻿using CongTDev.ObjectPooling;
+﻿using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class DirectionalExplosionStrightSpell : StraightExplosionBullet
     {
@@ -11,7 +11,11 @@ namespace CongTDev.AbilitySystem.Spell
             {
                 instance.gameObject.transform.position = position;
                 instance.gameObject.transform.rotation = transform.rotation;
-                var hits = Physics2D.OverlapCircleAll(position, explosionRange, LayerMaskHelper.FigherMask);
+                var hits = Physics2D.OverlapCircleAll(
+                    position,
+                    explosionRange,
+                    LayerMaskHelper.FigherMask
+                );
                 foreach (var hit in hits)
                 {
                     if (hit.TryGetComponent<Fighter>(out var fighter))
@@ -24,11 +28,9 @@ namespace CongTDev.AbilitySystem.Spell
                         {
                             ability.HitThisFighter(fighter);
                         }
-
                     }
                 }
             }
-
         }
     }
 }

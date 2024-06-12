@@ -1,22 +1,23 @@
-﻿using CongTDev.EventManagers;
-using CongTDev.IOSystem;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace CongTDev.MainMenu
+namespace Tqa.DungeonQuest.MainMenu
 {
     public class SelectorController : MonoBehaviour
     {
+        [SerializeField]
+        private ToggleGroup toggleGroup;
 
-        [SerializeField] private ToggleGroup toggleGroup;
+        [SerializeField]
+        private ToggleUserSeletion toggleUserSeletionPrefab;
 
-        [SerializeField] private ToggleUserSeletion toggleUserSeletionPrefab;
-
-        [SerializeField] private TextMeshProUGUI currentUserText;
-
+        [SerializeField]
+        private TextMeshProUGUI currentUserText;
 
         private readonly List<ToggleUserSeletion> toggleUserSeletions = new();
 
@@ -90,7 +91,5 @@ namespace CongTDev.MainMenu
                 Destroy(lassToggle.gameObject);
             }
         }
-
-
     }
 }

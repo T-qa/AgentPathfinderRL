@@ -5,10 +5,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class ChangeColorOnPointerEnter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Color enterColor;
-    [SerializeField] private Color exitColor;
+    [SerializeField]
+    private Color enterColor;
 
-    [SerializeField] private Image image;
+    [SerializeField]
+    private Color exitColor;
+
+    [SerializeField]
+    private Image image;
 
     private void Reset()
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+using Tqa.DungeonQuest.EventManagers;
 using UnityEngine;
-using CongTDev.EventManagers;
+using UnityEngine.SceneManagement;
 
-namespace CongTDev.ObjectPooling
+namespace Tqa.DungeonQuest.ObjectPooling
 {
     public static class PoolManager
     {
@@ -13,11 +13,12 @@ namespace CongTDev.ObjectPooling
         {
             _pools = new();
             SceneManager.sceneUnloaded += ClearPool;
-            EventManager.AddListener("OnMapChanging", ClearPool);
-            EventManager.AddListener("OnMapChanged", ClearPool);
+            EventManager.AddListener("OnMapChanging", EmptyPool);
+            EventManager.AddListener("OnMapChanged", EmptyPool);
         }
 
-        public static bool Get<T>(Prefab prefab, out T instance) where T : IPoolObject
+        public static bool Get<T>(Prefab prefab, out T instance)
+            where T : IPoolObject
         {
             try
             {
@@ -26,19 +27,20 @@ namespace CongTDev.ObjectPooling
                     pool = new ObjectPool(prefab.gameObject);
                     _pools[prefab.UniquePrefabID] = pool;
                 }
-                instance = (T)pool.Get();
+                instance = (T)pool.GetFromPool();
                 return true;
             }
             catch
             {
-                string info = prefab == null ? "Null prefab" : $"prefab with id : {prefab.UniquePrefabID}";
+                string info =
+                    prefab == null ? "Null prefab" : $"prefab with id : {prefab.UniquePrefabID}";
                 Debug.LogError($"Error when try to get {typeof(T)} from pool by {info}");
                 instance = default;
                 return false;
             }
         }
 
-        public static void ClearPool()
+        public static void EmptyPool()
         {
             foreach (var pool in _pools.Values)
             {
@@ -49,7 +51,7 @@ namespace CongTDev.ObjectPooling
 
         private static void ClearPool(Scene _)
         {
-            ClearPool();
+            EmptyPool();
         }
     }
 }

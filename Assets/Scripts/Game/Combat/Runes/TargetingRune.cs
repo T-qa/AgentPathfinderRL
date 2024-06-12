@@ -1,16 +1,18 @@
-﻿using CongTDev.ObjectPooling;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     [CreateAssetMenu(fileName = "Targeting rune", menuName = "Rune/Targeting")]
     public class TargetingRune : ActiveRune
     {
-        [field: SerializeField] public Prefab VfxPlayWhenActive { get; private set; }
+        [field: SerializeField]
+        public Prefab VfxPlayWhenActive { get; private set; }
 
-        [SerializeField] private List<BaseEffectFactory> effectsApplyToTarget;
+        [SerializeField]
+        private List<BaseEffectFactory> effectsApplyToTarget;
         public IEnumerable<BaseEffectFactory> EffectsApplyToTarget => effectsApplyToTarget;
 
         public override IItem CreateItem()

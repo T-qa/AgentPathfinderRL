@@ -1,10 +1,10 @@
-﻿using CongTDev.Communicate;
-using CongTDev.EventManagers;
-using System;
+﻿using System;
+using Tqa.DungeonQuest.Communicate;
+using Tqa.DungeonQuest.EventManagers;
 
 public class RewardSlot : ItemSlot<IItem>
 {
-    public int SlotIndex { get; set;}
+    public int SlotIndex { get; set; }
 
     public event Action<int> OnItemGot;
 
@@ -23,9 +23,12 @@ public class RewardSlot : ItemSlot<IItem>
     {
         base.OnSlotRightCliked();
         EventManager<IItemSlot>.RaiseEvent(Inventory.TRY_ADD_ITEM_TO_INVENTROY, this);
-        if(!IsSlotEmpty)
+        if (!IsSlotEmpty)
         {
-            EventManager<string>.RaiseEvent(Messenger.SEND_SYSTEM_MESSAGE, "Your inventory is full now. Please clean up it first.");
+            EventManager<string>.RaiseEvent(
+                Messenger.SEND_SYSTEM_MESSAGE,
+                "Your inventory is full now. Please clean up it first."
+            );
         }
     }
 }

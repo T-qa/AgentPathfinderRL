@@ -1,16 +1,18 @@
-﻿using CongTDev.IOSystem;
+﻿using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
-    public abstract class ActiveAbility<T> : Ability<T>, IActiveAbility where T : ActiveRune
+    public abstract class ActiveAbility<T> : Ability<T>, IActiveAbility
+        where T : ActiveRune
     {
         public float NextUseTime { get; protected set; } = Mathf.NegativeInfinity;
         public float CastDelay => Rune.BaseCastDelay;
 
         public float MaxUseRange => Rune.MaxUseRange;
 
-        protected ActiveAbility(T rune) : base(rune)
+        protected ActiveAbility(T rune)
+            : base(rune)
         {
             AddSubType("Active Ability");
         }
@@ -25,8 +27,7 @@ namespace CongTDev.AbilitySystem
 
         public bool IsInstantCast() => Rune.BaseCastDelay <= Mathf.Epsilon;
 
-        public float GetCooldownTime()
-            => Rune.BaseCooldown;
+        public float GetCooldownTime() => Rune.BaseCooldown;
 
         public float CurrentCoolDown => Mathf.Max(0, NextUseTime - Time.time);
 
@@ -36,12 +37,14 @@ namespace CongTDev.AbilitySystem
                 return Caster.Owner.team;
             else
             {
-                return Caster.Owner.team == Fighter.Team.Hero ? Fighter.Team.Monster : Fighter.Team.Hero;
+                return Caster.Owner.team == Fighter.Team.Hero
+                    ? Fighter.Team.Monster
+                    : Fighter.Team.Hero;
             }
         }
 
-        public bool IsRightTarget(Fighter target)
-            => target != null && !target.IsInvisibility && GetTargetTeam() == target.team;
+        public bool IsRightTarget(Fighter target) =>
+            target != null && !target.IsInvisibility && GetTargetTeam() == target.team;
 
         protected void MarkAsJustUse()
         {
@@ -49,4 +52,3 @@ namespace CongTDev.AbilitySystem
         }
     }
 }
-

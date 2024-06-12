@@ -8,7 +8,7 @@ public class ConfirmPanel : MonoBehaviour
 
     public static void Ask(string message, Action yesAction = null, Action noAction = null)
     {
-        if(_instanceCallback != null)
+        if (_instanceCallback != null)
         {
             _instanceCallback.Invoke(message, yesAction, noAction);
         }
@@ -18,7 +18,8 @@ public class ConfirmPanel : MonoBehaviour
         }
     }
 
-    [SerializeField] private TextMeshProUGUI messageText;
+    [SerializeField]
+    private TextMeshProUGUI messageText;
 
     private Action _yesAction;
 

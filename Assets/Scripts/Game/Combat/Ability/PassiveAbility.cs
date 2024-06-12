@@ -1,16 +1,17 @@
-﻿using CongTDev.IOSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tqa.DungeonQuest.IOSystem;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public class PassiveAbility : Ability<PassiveRune>, IPassiveAbility
     {
         private List<IEffect> _appliedEffect;
         private bool _isInstalled;
 
-        public PassiveAbility(PassiveRune rune) : base(rune)
+        public PassiveAbility(PassiveRune rune)
+            : base(rune)
         {
             AddSubType("Passive Ability");
             AddSubTypeByEffects(rune.EffectsApplyWhenEquip);
@@ -29,7 +30,8 @@ namespace CongTDev.AbilitySystem
 
         public override void Install(AbilityCaster caster)
         {
-            if (_isInstalled) return;
+            if (_isInstalled)
+                return;
             _isInstalled = true;
             Caster = caster;
 
@@ -42,9 +44,11 @@ namespace CongTDev.AbilitySystem
                 _appliedEffect.Add(effect);
             }
         }
+
         public void CleanUp()
         {
-            if (!_isInstalled) return;
+            if (!_isInstalled)
+                return;
 
             _isInstalled = false;
             foreach (IEffect effect in _appliedEffect)
@@ -66,6 +70,7 @@ namespace CongTDev.AbilitySystem
             public string runeJson;
 
             public PassiveAbilitySerialize() { }
+
             public PassiveAbilitySerialize(PassiveAbility passiveAbility)
             {
                 runeJson = passiveAbility.Rune.ToWrappedJson();
@@ -82,5 +87,3 @@ namespace CongTDev.AbilitySystem
         #endregion
     }
 }
-
-

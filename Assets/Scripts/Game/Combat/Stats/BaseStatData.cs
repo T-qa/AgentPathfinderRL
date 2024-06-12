@@ -33,19 +33,31 @@ public class LvGrowStat
 
         if (Health > 0)
         {
-            modifiers.Add(Stat.MaxHealth, new StatModifier(Health * level, StatModifier.BonusType.Flat, 0));
+            modifiers.Add(
+                Stat.MaxHealth,
+                new StatModifier(Health * level, StatModifier.BonusType.Flat, 0)
+            );
         }
         if (Mana > 0)
         {
-            modifiers.Add(Stat.MaxMana, new StatModifier(Mana * level, StatModifier.BonusType.Flat, 0));
+            modifiers.Add(
+                Stat.MaxMana,
+                new StatModifier(Mana * level, StatModifier.BonusType.Flat, 0)
+            );
         }
         if (AttackPower > 0)
         {
-            modifiers.Add(Stat.AttackPower, new StatModifier(AttackPower * level, StatModifier.BonusType.Flat, 0));
+            modifiers.Add(
+                Stat.AttackPower,
+                new StatModifier(AttackPower * level, StatModifier.BonusType.Flat, 0)
+            );
         }
         if (Defence > 0)
         {
-            modifiers.Add(Stat.Defence, new StatModifier(Defence * level, StatModifier.BonusType.Flat, 0));
+            modifiers.Add(
+                Stat.Defence,
+                new StatModifier(Defence * level, StatModifier.BonusType.Flat, 0)
+            );
         }
         return modifiers;
     }

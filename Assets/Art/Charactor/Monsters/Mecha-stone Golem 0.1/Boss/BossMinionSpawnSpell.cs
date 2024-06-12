@@ -1,23 +1,35 @@
-﻿using CongTDev.AbilitySystem;
-using CongTDev.AbilitySystem.Spell;
-using CongTDev.ObjectPooling;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.AbilitySystem.Spell;
+using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace CongTDev.TheBoss
+namespace Tqa.DungeonQuest.TheBoss
 {
-
     public class BossMinionSpawnSpell : PoolObject, ISpell
     {
-        [SerializeField] private Prefab monionPrefab;
-        [SerializeField] private Prefab spawnEffectPrefab;
-        [SerializeField] private BaseStatData statData;
-        [SerializeField] private float minRange;
-        [SerializeField] private float maxRange;
-        [SerializeField] private int count;
-        [SerializeField] private float spawnDelay;
+        [SerializeField]
+        private Prefab monionPrefab;
+
+        [SerializeField]
+        private Prefab spawnEffectPrefab;
+
+        [SerializeField]
+        private BaseStatData statData;
+
+        [SerializeField]
+        private float minRange;
+
+        [SerializeField]
+        private float maxRange;
+
+        [SerializeField]
+        private int count;
+
+        [SerializeField]
+        private float spawnDelay;
 
         public void KickOff(OrientationAbility ability, Vector2 direction)
         {
@@ -38,11 +50,11 @@ namespace CongTDev.TheBoss
         {
             for (int i = 0; i < count; i++)
             {
-                var spawnPosition = position + Random.insideUnitCircle * Random.Range(minRange, maxRange);
+                var spawnPosition =
+                    position + Random.insideUnitCircle * Random.Range(minRange, maxRange);
                 spawnPositions.Add(spawnPosition);
             }
         }
-
 
         private IEnumerator SpawnEffectState(List<Vector2> spawnPositions)
         {

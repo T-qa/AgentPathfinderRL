@@ -1,18 +1,16 @@
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
-using DG.Tweening;
 using System;
 using System.Collections;
+using DG.Tweening;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 
 public class GameManager : GlobalReference<GameManager>
 {
     public static string CurrentMap { get; private set; }
     public static bool IsPausing { get; private set; }
-
 
     [Serializable]
     public class GameStatus
@@ -39,8 +37,8 @@ public class GameManager : GlobalReference<GameManager>
         }
     }
 
-
-    [SerializeField] private Slider loadingSlider;
+    [SerializeField]
+    private Slider loadingSlider;
 
     protected override void Awake()
     {
@@ -58,21 +56,20 @@ public class GameManager : GlobalReference<GameManager>
 
     private IEnumerator Start()
     {
-        EventManager<string>.RaiseEvent("SendSystemMessage", "Wellcome to summorner's rift!");
+        EventManager<string>.RaiseEvent("SendSystemMessage", "Wellcome to Dungeon Quest!");
         yield return null;
         EventManager.RaiseEvent("OnGameLoad");
         yield return ChangeMapCoroutine("Town");
-        if(!_status.hasGuided)
+        if (!_status.hasGuided)
         {
             _status.hasGuided = true;
             var guide = Resources.Load<GameObject>("Guide Canvas");
-            if(guide != null)
+            if (guide != null)
             {
                 InputCentral.Disable();
                 Instantiate(guide);
             }
         }
-
     }
 
     private void Update()
@@ -92,14 +89,13 @@ public class GameManager : GlobalReference<GameManager>
     public void LoadStatus()
     {
         var status = SaveLoadHandler.LoadFromFile<GameStatus>(GameStatus.FILE_NAME);
-        if(status != null)
+        if (status != null)
         {
             _status = status;
         }
         else
         {
-            _status = new();
-            _status.gold = 1500;
+            _status = new() { gold = 1500 };
         }
     }
 

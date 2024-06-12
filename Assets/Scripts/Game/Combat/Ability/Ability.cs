@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
-    public abstract class Ability<T> where T : Rune
+    public abstract class Ability<T>
+        where T : Rune
     {
         public readonly T Rune;
         public event Action OnDestroy;
@@ -50,4 +51,3 @@ namespace CongTDev.AbilitySystem
         }
     }
 }
-

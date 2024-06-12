@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class ChestStorage : GlobalReference<ChestStorage>
 {
-    [SerializeField] private ChestSlot itemSlotPrefabs;
-    [SerializeField] private Transform contentCanvas;
+    [SerializeField]
+    private ChestSlot itemSlotPrefabs;
+
+    [SerializeField]
+    private Transform contentCanvas;
 
     private readonly List<ChestSlot> slots = new();
 
@@ -12,7 +15,7 @@ public class ChestStorage : GlobalReference<ChestStorage>
 
     public void ShowItems(IItem[] items)
     {
-        if(items == null)
+        if (items == null)
             return;
 
         ChangeCapacity(items.Length);

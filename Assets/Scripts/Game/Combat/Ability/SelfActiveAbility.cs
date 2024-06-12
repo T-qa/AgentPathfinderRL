@@ -1,13 +1,14 @@
-﻿using CongTDev.AudioManagement;
-using CongTDev.IOSystem;
-using CongTDev.ObjectPooling;
-using System.Text;
+﻿using System.Text;
+using Tqa.DungeonQuest.AudioManagement;
+using Tqa.DungeonQuest.IOSystem;
+using Tqa.DungeonQuest.ObjectPooling;
 
-namespace CongTDev.AbilitySystem
+namespace Tqa.DungeonQuest.AbilitySystem
 {
     public class SelfActiveAbility : ActiveAbility<SelfActiveRune>
     {
-        public SelfActiveAbility(SelfActiveRune rune) : base(rune)
+        public SelfActiveAbility(SelfActiveRune rune)
+            : base(rune)
         {
             AddSubType("Sefl Active");
             AddSubTypeByEffects(rune.EffectsApplyToCaster);
@@ -111,7 +112,5 @@ namespace CongTDev.AbilitySystem
         }
 
         #endregion
-
     }
-
 }

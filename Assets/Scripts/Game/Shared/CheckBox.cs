@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CongTDev.EventManagers
+namespace Tqa.DungeonQuest.EventManagers
 {
     public sealed class CheckBox : ObjectHolder<bool>
     {
-        public CheckBox() 
+        public CheckBox()
         {
             value = false;
         }
+
         public void Check()
         {
             value = true;

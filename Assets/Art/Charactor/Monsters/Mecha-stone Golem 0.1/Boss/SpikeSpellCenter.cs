@@ -1,14 +1,21 @@
-﻿using CongTDev.ObjectPooling;
+﻿using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
-namespace CongTDev.AbilitySystem.Spell
+namespace Tqa.DungeonQuest.AbilitySystem.Spell
 {
     public class SpikeSpellCenter : PoolObject, ISpell
     {
-        [SerializeField] private Prefab spikeSpellPrefab;
-        [SerializeField] private float minRange;
-        [SerializeField] private float maxRange;
-        [SerializeField] private Transform[] spawnPoints;
+        [SerializeField]
+        private Prefab spikeSpellPrefab;
+
+        [SerializeField]
+        private float minRange;
+
+        [SerializeField]
+        private float maxRange;
+
+        [SerializeField]
+        private Transform[] spawnPoints;
 
         public void KickOff(OrientationAbility ability, Vector2 _)
         {
@@ -22,4 +29,3 @@ namespace CongTDev.AbilitySystem.Spell
         }
     }
 }
-

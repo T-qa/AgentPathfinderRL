@@ -1,16 +1,18 @@
-using CongTDev.AbilitySystem;
-using CongTDev.EventManagers;
-using CongTDev.IOSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.EventManagers;
+using Tqa.DungeonQuest.IOSystem;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    [SerializeField] private EquipmentSlot[] equipmentSlot;
+    [SerializeField]
+    private EquipmentSlot[] equipmentSlot;
 
-    [SerializeField] private PassiveAbilitySlot[] passiveAbilitySlots;
+    [SerializeField]
+    private PassiveAbilitySlot[] passiveAbilitySlots;
 
     private readonly Dictionary<Equipment.Slot, EquipmentSlot> equipmentSlotsMap = new();
 
@@ -22,10 +24,12 @@ public class EquipmentManager : MonoBehaviour
         }
         SubscribeEvents();
     }
+
     private void OnDestroy()
     {
         UnsubscribeEvents();
     }
+
     private void SubscribeEvents()
     {
         EventManager<IItemSlot>.AddListener("TryEquipEquipment", TryEquipEquipment);
@@ -77,10 +81,11 @@ public class EquipmentManager : MonoBehaviour
     {
         try
         {
-            var serializedEquipmentsManager = (SerializedEquipmentManager)SaveLoadHandler.LoadFromFile(FileNameData.Equiments);
+            var serializedEquipmentsManager = (SerializedEquipmentManager)
+                SaveLoadHandler.LoadFromFile(FileNameData.Equiments);
             serializedEquipmentsManager.Load(this);
         }
-        catch 
+        catch
         {
             foreach (var slot in equipmentSlotsMap.Values)
             {
@@ -91,7 +96,6 @@ public class EquipmentManager : MonoBehaviour
                 slot.PushItem(null);
             }
         }
-        
     }
 
     public class SerializedEquipmentManager : SerializedObject, ISerializable
@@ -106,11 +110,21 @@ public class EquipmentManager : MonoBehaviour
 
         public SerializedEquipmentManager(EquipmentManager equipmentManager)
         {
-            weaponJson = equipmentManager.equipmentSlotsMap[Equipment.Slot.Weapon].Item.ToJsonWrapper();
-            shieldJson = equipmentManager.equipmentSlotsMap[Equipment.Slot.Shield].Item.ToJsonWrapper();
-            shoseJson = equipmentManager.equipmentSlotsMap[Equipment.Slot.Shoe].Item.ToJsonWrapper();
-            arrmorJson = equipmentManager.equipmentSlotsMap[Equipment.Slot.Armor].Item.ToJsonWrapper();
-            passiveAbilityJsons = equipmentManager.passiveAbilitySlots.Select(slot => slot.Item.ToJsonWrapper()).ToArray();
+            weaponJson = equipmentManager
+                .equipmentSlotsMap[Equipment.Slot.Weapon]
+                .Item.ToJsonWrapper();
+            shieldJson = equipmentManager
+                .equipmentSlotsMap[Equipment.Slot.Shield]
+                .Item.ToJsonWrapper();
+            shoseJson = equipmentManager
+                .equipmentSlotsMap[Equipment.Slot.Shoe]
+                .Item.ToJsonWrapper();
+            arrmorJson = equipmentManager
+                .equipmentSlotsMap[Equipment.Slot.Armor]
+                .Item.ToJsonWrapper();
+            passiveAbilityJsons = equipmentManager
+                .passiveAbilitySlots.Select(slot => slot.Item.ToJsonWrapper())
+                .ToArray();
         }
 
         public void Load(EquipmentManager equipmentManager)

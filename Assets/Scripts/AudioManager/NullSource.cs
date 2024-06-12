@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace CongTDev.AudioManagement
+namespace Tqa.DungeonQuest.AudioManagement
 {
     public class NullSource : PoolingAudioSource
     {
@@ -22,7 +22,11 @@ namespace CongTDev.AudioManagement
         public override bool IsPlaying => false;
 
         protected override void FixedUpdate() { }
-        public override PoolingAudioSource Play(AudioClip audioClip, AudioMixerGroup mixerGroup = null)
+
+        public override PoolingAudioSource Play(
+            AudioClip audioClip,
+            AudioMixerGroup mixerGroup = null
+        )
         {
             return this;
         }
@@ -47,8 +51,6 @@ namespace CongTDev.AudioManagement
             return this;
         }
 
-        public override void Stop()
-        {
-        }
+        public override void Stop() { }
     }
 }

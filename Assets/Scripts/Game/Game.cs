@@ -1,4 +1,4 @@
-﻿using CongTDev.EventManagers;
+﻿using Tqa.DungeonQuest.EventManagers;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public static class Game
     {
         ConfirmPanel.Ask("Are you sure you want to quit game?", QuitImediately);
     }
+
     public static void QuitImediately()
     {
         EventManager.RaiseEvent("OnGameSave");

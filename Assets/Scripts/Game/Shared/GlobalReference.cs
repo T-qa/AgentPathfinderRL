@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-public class GlobalReference<T> : MonoBehaviour where T : MonoBehaviour
+public class GlobalReference<T> : MonoBehaviour
+    where T : MonoBehaviour
 {
     private static T _reference;
-    public static T Instance 
+    public static T Instance
     {
         get
         {
-            if(!IsValidInstance())
+            if (!IsValidInstance())
             {
                 _reference = FindAnyObjectByType<T>();
             }
@@ -22,11 +23,11 @@ public class GlobalReference<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if(IsValidInstance() && !ReferenceEquals(_reference, this))
+        if (IsValidInstance() && !ReferenceEquals(_reference, this))
             Destroy(gameObject);
         else
         {
             _reference = (T)(MonoBehaviour)this;
-        }    
+        }
     }
 }

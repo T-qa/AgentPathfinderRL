@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CongTDev.ObjectPooling
+namespace Tqa.DungeonQuest.ObjectPooling
 {
     public interface IPoolObject
     {
