@@ -21,6 +21,9 @@ public class TrainingManager : MonoBehaviour
     // Parent offset
     private Vector3 parentOffset = new Vector3(19.5f, 0f, 0f);
 
+    // Reference to QLearner instance
+    private QLearner _qLearner;
+
     void Start()
     {
         StartCoroutine(RunTraining());
@@ -48,6 +51,9 @@ public class TrainingManager : MonoBehaviour
             // Respawn player and monster
             RespawnPlayer();
             RespawnMonster();
+
+            // Notify QLearner of episode completion
+            // _qLearner.NotifyEpisodeComplete();
         }
     }
 

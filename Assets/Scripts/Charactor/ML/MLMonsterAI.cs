@@ -15,18 +15,21 @@ public class MLMonsterAI : MonoBehaviour
     public float explorationRate = 1.0f;
     public float explorationDecay = 0.99f;
 
-    private QLearner qLearner;
+    public QLearner qLearner;
     private Vector3 startPosition;
     private GameObject player;
 
     private Vector3 lastMonsterPosition;
     private Vector3 lastPlayerPosition;
 
+    private StatisticsDisplay statsDisplay;
+
     void Start()
     {
         qLearner = new QLearner(learningRate, discountFactor, explorationRate, explorationDecay);
         startPosition = transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
+        statsDisplay = FindObjectOfType<StatisticsDisplay>(); // Assuming it's in the scene
 
         if (player == null)
         {

@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QLearner
 {
-    private Dictionary<string, float[]> qTable;
+    public event Action OnStep;
+    public event Action OnEpisodeComplete;
+
+    public Dictionary<string, float[]> qTable;
     private float learningRate;
     private float discountFactor;
     private float explorationRate;
@@ -46,7 +50,7 @@ public class QLearner
                 qTable[state] = new float[5]; // Initialize if state not present
             }
             float[] qValues = qTable[state];
-            int bestAction = Array.IndexOf(qValues, Mathf.Max(qValues));
+            int bestAction = System.Array.IndexOf(qValues, Mathf.Max(qValues));
             return bestAction;
         }
     }
@@ -69,11 +73,18 @@ public class QLearner
         // Update Q-value using the Q-learning formula
         qValues[action] +=
             learningRate * (reward + discountFactor * bestNextQValue - qValues[action]);
+
+        OnStep?.Invoke(); // Notify step completion
     }
 
     public void DecayExplorationRate()
     {
         // Decrease exploration rate over time
         explorationRate *= explorationDecay;
+    }
+
+    public void NotifyEpisodeComplete()
+    {
+        OnEpisodeComplete?.Invoke(); // Notify episode completion
     }
 }
