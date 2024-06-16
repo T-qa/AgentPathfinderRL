@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MonstersAI : SeekerMovingAI
+public class MonstersAI : BaseMovementInput
 {
     [Header("Monster AI fields")]
     [SerializeField]
@@ -29,8 +29,17 @@ public class MonstersAI : SeekerMovingAI
 
     private bool _wasTakenHit;
 
+    private QLearning qLearning;
+
+    // Define the number of states based on your game's requirements
+    private int stateCount = 100;
+
+    // Move Up, Down, Left, Right, Attack
+    private int actionCount = 5;
+
     private void Awake()
     {
+        qLearning = new QLearning(0.1f, 0.9f, 0.1f, 0.99f);
         SetCombatBehaviour(GetComponent<BaseAICombatBehaviour>());
         Controller.OnDoneSetup += StartAICoroutine;
         Controller.Combat.OnTakeDamage += TakeHit;
@@ -75,8 +84,7 @@ public class MonstersAI : SeekerMovingAI
         Player = PlayerController.Instance.Combat;
         StartPosition = transform.position;
         _wasTakenHit = false;
-        float walkTime = 0;
-        yield return 0.3f.Wait();
+        yield return new WaitForSeconds(0.3f);
         while (IsAlive())
         {
             var distanceToPlayer = Vector2.Distance(transform.position, PlayerPosition);
@@ -86,22 +94,55 @@ public class MonstersAI : SeekerMovingAI
                 _wasTakenHit = false;
                 continue;
             }
-            RandomWalk(ref walkTime);
-            yield return updateInterval.Wait();
+            QLearningMove();
+            yield return new WaitForSeconds(updateInterval);
         }
         StopMove();
         yield return 4f.Wait();
         Controller.ReturnToPool();
     }
 
-    private void RandomWalk(ref float walkTime)
+    private void QLearningMove()
     {
-        if (Time.time > walkTime)
+        string currentState = qLearning.GetState(
+            transform.position,
+            PlayerPosition,
+            new Vector2[0]
+        );
+        int action = qLearning.GetNextAction(currentState);
+        ExecuteAction(action);
+    }
+
+    private void ExecuteAction(int action)
+    {
+        switch (action)
         {
-            var randomPosition = StartPosition + Random.insideUnitCircle * moveRange;
-            walkTime = Time.time + directChangeInterval;
-            MoveTo(randomPosition);
+            case 0:
+                MoveTo(transform.position + Vector3.up);
+                break;
+            case 1:
+                MoveTo(transform.position + Vector3.down);
+                break;
+            case 2:
+                MoveTo(transform.position + Vector3.left);
+                break;
+            case 3:
+                MoveTo(transform.position + Vector3.right);
+                break;
+            case 4:
+                // Implement attack logic
+                break;
         }
+    }
+
+    public void MoveTo(Vector2 destination)
+    {
+        InputVector = (destination - (Vector2)transform.position).normalized;
+    }
+
+    private void StopMove()
+    {
+        InputVector = Vector2.zero;
     }
 
     private void TakeHit(DamageBlock _)

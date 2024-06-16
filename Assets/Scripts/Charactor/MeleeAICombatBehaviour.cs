@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
@@ -94,3 +94,4 @@ public class MeleeAICombatBehaviour : BaseAICombatBehaviour
         }
     }
 }
+*/

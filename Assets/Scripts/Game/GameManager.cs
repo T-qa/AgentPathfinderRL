@@ -59,7 +59,7 @@ public class GameManager : GlobalReference<GameManager>
         EventManager<string>.RaiseEvent("SendSystemMessage", "Wellcome to Dungeon Quest!");
         yield return null;
         EventManager.RaiseEvent("OnGameLoad");
-        yield return ChangeMapCoroutine("Town");
+        yield return ChangeMapCoroutine("DungeonTest");
         if (!_status.hasGuided)
         {
             _status.hasGuided = true;
