@@ -1,4 +1,4 @@
-﻿using TMPro;
+﻿/*using TMPro;
 using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
@@ -37,3 +37,4 @@ public class FollowMonsterInfo : PoolObject
         _attachedMonster = null;
     }
 }
+*/

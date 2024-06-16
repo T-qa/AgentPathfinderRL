@@ -1,4 +1,4 @@
-﻿using Tqa.DungeonQuest.ObjectPooling;
+﻿/*using Tqa.DungeonQuest.ObjectPooling;
 using UnityEngine;
 
 public class MonsterWorldSpaceUIManager : GlobalReference<MonsterWorldSpaceUIManager>
@@ -32,3 +32,4 @@ public class MonsterWorldSpaceUIManager : GlobalReference<MonsterWorldSpaceUIMan
         return monsterInfo;
     }
 }
+*/

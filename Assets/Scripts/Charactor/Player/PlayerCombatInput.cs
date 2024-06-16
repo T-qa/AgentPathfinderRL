@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,3 +16,4 @@ public class PlayerCombatInput : BaseMovementInput
         InputVector = _inputActions.PlayerMove.Move.ReadValue<Vector2>();
     }
 }
+*/

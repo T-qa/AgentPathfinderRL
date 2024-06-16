@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using Tqa.DungeonQuest.AbilitySystem;
 using UnityEngine;
 
@@ -18,7 +18,6 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
     protected float vision;
 
     protected AbilityCaster abilityCaster;
-    protected MonstersAI monsterAI;
     private FollowHealthBar _healthBar;
 
     private void OnDisable()
@@ -28,11 +27,11 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
 
     public bool IsAlive() => !abilityCaster.Owner.Health.IsEmpty;
 
-    public virtual void Prepare(MonstersAI monsterAI)
-    {
-        this.monsterAI = monsterAI;
-        abilityCaster = monsterAI.Controller.AbilityCaster;
-    }
+    /* public virtual void Prepare(MonstersAI monsterAI)
+     {
+         this.monsterAI = monsterAI;
+         abilityCaster = monsterAI.Controller.AbilityCaster;
+     }
 
     public IEnumerator StartCombatState()
     {
@@ -55,7 +54,7 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
         GiveBackHealthBar();
         if (IsAlive())
         {
-            monsterAI.MoveTo(monsterAI.StartPosition);
+            // monsterAI.MoveTo(monsterAI.StartPosition);
             yield return COMBAT_BREAK_TIME.Wait();
         }
     }
@@ -89,3 +88,4 @@ public abstract class BaseAICombatBehaviour : MonoBehaviour
     }
 #endif
 }
+*/

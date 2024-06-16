@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tqa.DungeonQuest.EventManagers;
@@ -91,6 +90,16 @@ public class MonsterStageSpawner : MonoBehaviour
         }
     }
 
+    public bool HasActiveMonsters()
+    {
+        return CurrentMonster > 0;
+    }
+
+    public void ResetSpawner()
+    {
+        CurrentMonster = 0;
+    }
+
     private bool CanSpawnAtThisPoint(Vector2 position)
     {
         return !Physics2D.OverlapCircle(position, 1f, LayerMaskHelper.ObstacleMask);
@@ -114,3 +123,4 @@ public class MonsterSpawnInfo
     public int count;
     public int xp;
 }
+*/

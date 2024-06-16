@@ -38,7 +38,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (
             collision.TryGetComponent<Fighter>(out var fighter)
-            && fighter.team == Fighter.Team.Hero
+            && (fighter.team == Fighter.Team.Hero || fighter.team == Fighter.Team.Monster)
         )
         {
             var damageBlock = GenericPool<DamageBlock>.Get();

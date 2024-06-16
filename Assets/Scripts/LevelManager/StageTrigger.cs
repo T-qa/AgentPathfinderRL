@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class StageTrigger : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class StageTrigger : MonoBehaviour
 
     public UnityEvent OnStageTrigger;
     public UnityEvent OnStageEnded;
+    public UnityEvent OnAllMonstersDefeated; // Event to trigger scene restart
 
     private bool _isTrigged = false;
     private bool _isActive = false;
@@ -50,5 +52,34 @@ public class StageTrigger : MonoBehaviour
         _isActive = false;
         levelManager.SetToDefaultLevelBound();
         OnStageEnded.Invoke();
+
+        if (AreAllMonstersDefeated())
+        {
+            // Trigger scene restart
+            OnAllMonstersDefeated.Invoke();
+            RespawnMonsters();
+        }
+    }
+
+    private bool AreAllMonstersDefeated()
+    {
+        _isActive = true;
+        _workingSpawner = stageSpawners.Length;
+        foreach (var stageSpawner in stageSpawners)
+        {
+            if (stageSpawner.HasActiveMonsters())
+                return false;
+        }
+        return true;
+    }
+
+    private void RespawnMonsters()
+    {
+        foreach (var stageSpawner in stageSpawners)
+        {
+            stageSpawner.ResetSpawner();
+            stageSpawner.StartSpawning(OnSpawnerEnded);
+        }
     }
 }
+*/

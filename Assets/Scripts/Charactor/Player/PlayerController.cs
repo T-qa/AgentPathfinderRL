@@ -107,6 +107,6 @@ public class PlayerController : BaseCombatCharactorController
         Movement.ClearState();
         Animator.ClearState();
         Animator.SetMovingState(Movement.IsMoving);
-        Movement.MoveDirect = MovementInput.InputVector;
+     //   Movement.MoveDirect = BaseMovementInput.Instance.InputVector;
     }
 }

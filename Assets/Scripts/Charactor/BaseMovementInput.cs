@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
 
-public abstract class BaseMovementInput : MonoBehaviour
+namespace Tqa.DungeonQuest.InputSytem
+{
+    
+public class BaseMovementInput : MonoBehaviour
 {
     private Vector2 _inputVector;
     public Vector2 InputVector
@@ -18,4 +21,5 @@ public abstract class BaseMovementInput : MonoBehaviour
     }
 
     public event Action<Vector2> OnInputChange;
+}
 }

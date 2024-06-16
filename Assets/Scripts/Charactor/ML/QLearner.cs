@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QLearning
+public class QLearner
 {
     private Dictionary<string, float[]> qTable;
     private float learningRate;
     private float discountFactor;
     private float explorationRate;
     private float explorationDecay;
-    private float previousDistance;
 
-    public QLearning(
+    public QLearner(
         float learningRate,
         float discountFactor,
         float explorationRate,
@@ -25,15 +24,10 @@ public class QLearning
         this.explorationDecay = explorationDecay;
     }
 
-    public string GetState(Vector2 monsterPosition, Vector2 playerPosition, Vector2[] obstacles)
+    public string GetState(Vector3 monsterPosition, Vector3 playerPosition)
     {
-        // Simplified example of state representation
         string state =
-            $"{monsterPosition.x},{monsterPosition.y},{playerPosition.x},{playerPosition.y}";
-        foreach (var obstacle in obstacles)
-        {
-            state += $",{obstacle.x},{obstacle.y}";
-        }
+            $"{Mathf.RoundToInt(monsterPosition.x)},{Mathf.RoundToInt(monsterPosition.y)},{Mathf.RoundToInt(playerPosition.x)},{Mathf.RoundToInt(playerPosition.y)}";
         return state;
     }
 
@@ -42,7 +36,7 @@ public class QLearning
         if (UnityEngine.Random.value < explorationRate)
         {
             // Explore: choose a random action
-            return UnityEngine.Random.Range(0, 5); // 4 move directions + 1 attack
+            return UnityEngine.Random.Range(0, 5); // 5 actions: 4 moves + wait
         }
         else
         {
@@ -61,17 +55,18 @@ public class QLearning
     {
         if (!qTable.ContainsKey(state))
         {
-            qTable[state] = new float[5];
+            qTable[state] = new float[5]; // Initialize Q-values for actions
         }
         if (!qTable.ContainsKey(nextState))
         {
-            qTable[nextState] = new float[5];
+            qTable[nextState] = new float[5]; // Initialize Q-values for actions
         }
 
         float[] qValues = qTable[state];
         float[] nextQValues = qTable[nextState];
         float bestNextQValue = Mathf.Max(nextQValues);
 
+        // Update Q-value using the Q-learning formula
         qValues[action] +=
             learningRate * (reward + discountFactor * bestNextQValue - qValues[action]);
     }
@@ -80,42 +75,5 @@ public class QLearning
     {
         // Decrease exploration rate over time
         explorationRate *= explorationDecay;
-    }
-
-    public float CalculateReward(
-        Vector2 monsterPosition,
-        Vector2 playerPosition,
-        bool attacked,
-        bool hitByPlayer,
-        bool inTrap,
-        bool avoidedTrap
-    )
-    {
-        float reward = 0.0f;
-
-        if (Vector2.Distance(monsterPosition, playerPosition) < previousDistance)
-        {
-            reward += 1.0f; // Moving closer to the player
-        }
-        if (attacked)
-        {
-            reward += 10.0f; // Successful attack
-        }
-        if (hitByPlayer)
-        {
-            reward -= 5.0f; // Hit by the player
-        }
-        if (inTrap)
-        {
-            reward -= 10.0f; // Monster in a trap
-        }
-        if (avoidedTrap)
-        {
-            reward += 5.0f; // Avoided a trap
-        }
-
-        previousDistance = Vector2.Distance(monsterPosition, playerPosition);
-
-        return reward;
     }
 }

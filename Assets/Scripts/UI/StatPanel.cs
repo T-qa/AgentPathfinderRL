@@ -1,4 +1,4 @@
-using TMPro;
+/*using TMPro;
 using UnityEngine;
 
 public class StatPanel : MonoBehaviour
@@ -68,3 +68,4 @@ public class StatPanel : MonoBehaviour
         }
     }
 }
+*/

@@ -1,11 +1,9 @@
 ﻿using Tqa.DungeonQuest.AbilitySystem;
+using Tqa.DungeonQuest.InputSytem;
 using UnityEngine;
 
 public abstract class BaseCombatCharactorController : MonoBehaviour
 {
-    [field: SerializeField]
-    public BaseMovementInput MovementInput { get; private set; }
-
     [field: SerializeField]
     public Movement Movement { get; private set; }
 
@@ -22,7 +20,7 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
     {
         Movement.OnStartMoving += StartMoving;
         Movement.OnStopMoving += StopMoving;
-        MovementInput.OnInputChange += OnInputValueChange;
+       // BaseMovementInput.OnInputChange += OnInputValueChange;
         Combat.OnTakeDamage += OnTakeDamage;
         Combat.OnDead += OnDead;
         AbilityCaster.OnCastingStart += ShowCastingBar;
@@ -34,7 +32,7 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
         {
             Movement.OnStartMoving -= StartMoving;
             Movement.OnStopMoving -= StopMoving;
-            MovementInput.OnInputChange -= OnInputValueChange;
+         //   MovementInput.OnInputChange -= OnInputValueChange;
         }
         if (Combat != null)
         {
@@ -47,6 +45,11 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
         }
     }
 
+    protected virtual void OnInputValueChange(Vector2 vector)
+    {
+        Movement.MoveDirect = vector;
+    }
+
     protected virtual void StartMoving()
     {
         Animator.SetMovingState(true);
@@ -55,11 +58,6 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
     protected virtual void StopMoving()
     {
         Animator.SetMovingState(false);
-    }
-
-    protected virtual void OnInputValueChange(Vector2 vector)
-    {
-        Movement.MoveDirect = vector;
     }
 
     protected virtual void OnTakeDamage(DamageBlock block)
@@ -80,3 +78,4 @@ public abstract class BaseCombatCharactorController : MonoBehaviour
         CastingBarManager.Instance.ShowCastingBar(AbilityCaster);
     }
 }
+

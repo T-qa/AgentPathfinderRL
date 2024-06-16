@@ -80,11 +80,11 @@ namespace Tqa.DungeonQuest.TheBoss
         {
             foreach (var spawnPosition in spawnPositions)
             {
-                if (PoolManager.Get<MonstersController>(monionPrefab, out var minion))
+               /* if (PoolManager.Get<MonstersController>(monionPrefab, out var minion))
                 {
                     minion.transform.position = spawnPosition;
                     minion.Initialize(statData, PlayerLevelSystem.CurrentLevel);
-                }
+                }*/
             }
         }
     }
