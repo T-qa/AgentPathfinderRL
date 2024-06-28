@@ -10,6 +10,7 @@ public class StatisticsDisplay : MonoBehaviour
     public TextMeshProUGUI averageRewardPerEpisodeText;
     public TextMeshProUGUI highestRewardText;
     public TextMeshProUGUI averageStepsToHighestRewardText;
+    public TextMeshProUGUI explorationRateText;
 
     public void UpdateStatistics(QLearner qLearner)
     {
@@ -29,7 +30,7 @@ public class StatisticsDisplay : MonoBehaviour
 
         totalStepsText.text = "Total Steps: " + totalSteps;
         totalEpisodesText.text = "Total Episodes: " + totalEpisodes;
-        convergenceQValueText.text = "Convergence of Q-Value: " + convergenceQValue;
+        convergenceQValueText.text = "Convergence of Q-Value: " + convergenceQValue.ToString("F2");
         averageStepsPerEpisodeText.text = "Average Steps per Episode: " + averageStepsPerEpisode;
         averageRewardPerEpisodeText.text = "Average Reward per Episode: " + averageRewardPerEpisode;
         highestRewardText.text = "Highest Reward: " + highestReward;

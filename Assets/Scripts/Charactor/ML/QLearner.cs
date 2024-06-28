@@ -10,6 +10,7 @@ public class QLearner
     private float discountFactor;
     private float explorationRate;
     private float explorationDecay;
+     private float minExplorationRate = 0.1f;
 
     // Tracking variables
     public int TotalSteps { get; private set; }
@@ -19,6 +20,7 @@ public class QLearner
     public int HighestRewardSteps { get; private set; }
     public int SuccessCount { get; private set; }
     public float ConvergenceQValue { get; private set; }
+    public float ExplorationRate => explorationRate; // Expose exploration rate publicly
 
     private float episodeReward;
     private int episodeSteps;
@@ -96,7 +98,7 @@ public class QLearner
 
     public void DecayExplorationRate()
     {
-        explorationRate *= explorationDecay;
+                explorationRate = Mathf.Max(explorationRate * explorationDecay, minExplorationRate); // Apply exponential decay with a floor
     }
 
     public void EndEpisode()

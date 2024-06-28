@@ -239,10 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea96994c82978c4586295a17b4a063c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveRange: 6
-  detectRange: 10
-  updateInterval: 0.5
-  learningRate: 0.1
+  updateInterval: 0.05
+  gameSpeed: 1
+  learningRate: 0.7
   discountFactor: 0.9
   explorationRate: 1
   explorationDecay: 0.99
