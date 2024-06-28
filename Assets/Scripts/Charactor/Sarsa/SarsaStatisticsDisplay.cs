@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class StatisticsDisplay : MonoBehaviour
+public class SarsaStatisticsDisplay : MonoBehaviour
 {
     public TextMeshProUGUI totalStepsText;
     public TextMeshProUGUI totalEpisodesText;
@@ -11,15 +11,15 @@ public class StatisticsDisplay : MonoBehaviour
     public TextMeshProUGUI highestRewardText;
     public TextMeshProUGUI averageStepsToHighestRewardText;
 
-    public void UpdateStatistics(QLearner qLearner)
+    public void UpdateStatistics(SarsaLearner sarsaLearner)
     {
-        int totalSteps = qLearner.TotalSteps;
-        int totalEpisodes = qLearner.TotalEpisodes;
-        float convergenceQValue = qLearner.ConvergenceQValue;
-        float totalReward = qLearner.TotalReward;
-        float highestReward = qLearner.HighestReward;
-        int successCount = qLearner.SuccessCount;
-        int highestRewardSteps = qLearner.HighestRewardSteps;
+        int totalSteps = sarsaLearner.TotalSteps;
+        int totalEpisodes = sarsaLearner.TotalEpisodes;
+        float convergenceQValue = sarsaLearner.ConvergenceQValue;
+        float totalReward = sarsaLearner.TotalReward;
+        float highestReward = sarsaLearner.HighestReward;
+        int successCount = sarsaLearner.SuccessCount;
+        int highestRewardSteps = sarsaLearner.HighestRewardSteps;
 
         float averageStepsPerEpisode = (totalEpisodes > 0) ? (float)totalSteps / totalEpisodes : 0;
         float averageRewardPerEpisode = (totalEpisodes > 0) ? totalReward / totalEpisodes : 0;
