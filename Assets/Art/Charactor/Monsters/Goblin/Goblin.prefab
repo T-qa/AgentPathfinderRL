@@ -239,8 +239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff8aa8516e6fc84b8e30445e9da246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateInterval: 0.5
-  gameSpeed: 1
+  updateInterval: 0.05
+  gameSpeed: 4.35
   learningRate: 1
   discountFactor: 0.9
   explorationRate: 1

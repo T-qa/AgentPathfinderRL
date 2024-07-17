@@ -34,13 +34,6 @@ public class SarsaMonsterAI : MonoBehaviour
         );
         startPosition = transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError(
-                "Player GameObject not found. Make sure the player GameObject has the tag 'Player'."
-            );
-            return;
-        }
 
         StartCoroutine(AICoroutine());
     }

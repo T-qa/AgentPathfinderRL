@@ -27,6 +27,8 @@ public class SarsaStatisticsDisplay : MonoBehaviour
         float averageStepsToHighestReward =
             (successCount > 0) ? (float)highestRewardSteps / successCount : 0;
 
+        float explorationRate = sarsaLearner.ExplorationRate;
+
         totalStepsText.text = "Total Steps: " + totalSteps;
         totalEpisodesText.text = "Total Episodes: " + totalEpisodes;
         convergenceQValueText.text = "Convergence of Q-Value: " + convergenceQValue.ToString("F2");

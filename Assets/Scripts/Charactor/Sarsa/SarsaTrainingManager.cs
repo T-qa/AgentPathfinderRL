@@ -20,7 +20,7 @@ public class SarsaTrainingManager : MonoBehaviour
 
     private SarsaLearner _sarsaLearner;
 
-    private string logFilePath = "Assets/Scripts/sarsa_training_metrics.csv";
+    private string logFilePath = "Assets/Scripts/sarsa_training1_metrics.csv";
     private StreamWriter logWriter;
 
     private int episodeCount = 0; // Episode counter
