@@ -163,8 +163,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1171931187}
     m_Modifications:
     - target: {fileID: 732134544563568231, guid: ccdb9426737567d409c72606294eed3b, type: 3}
+      propertyPath: gameSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 732134544563568231, guid: ccdb9426737567d409c72606294eed3b, type: 3}
       propertyPath: learningRate
-      value: 0.7
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 732134544563568231, guid: ccdb9426737567d409c72606294eed3b, type: 3}
       propertyPath: updateInterval
@@ -176,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2966559937726218048, guid: ccdb9426737567d409c72606294eed3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.19
+      value: -5.71
       objectReference: {fileID: 0}
     - target: {fileID: 2966559937726218048, guid: ccdb9426737567d409c72606294eed3b, type: 3}
       propertyPath: m_LocalPosition.z

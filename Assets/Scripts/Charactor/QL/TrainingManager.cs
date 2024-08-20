@@ -20,7 +20,7 @@ public class TrainingManager : MonoBehaviour
 
     private QLearner _qLearner;
 
-    private string logFilePath = "Assets/Scripts/training1_metrics.csv";
+    private string logFilePath = "Assets/Scripts/TrainingResults/QL_training_result.csv";
     private StreamWriter logWriter;
 
     private int episodeCount = 0; // Episode counter
